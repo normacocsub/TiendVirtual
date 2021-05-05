@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8yx786+LQ0/6YgAnEJSJGFido+Bqy/cd4CJ71jlsjYa8/3flVc9c7mY1+knpEMx+POIUVSCR6OrywVe0oMbE+A==",
+  "dgSpecHash": "8cTO9Igkc9WYVMvZYMeQ1fWYYGLdud9SsGAKgkgsbvKLO4POiZpsGwX0IPKo0M0NvfHZ28wkRJWCguWYE1FpVw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\BLL\\BLL.csproj",
+  "projectFilePath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\BLL\\BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\norma\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\norma\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

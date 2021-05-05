@@ -15,6 +15,15 @@ namespace DAL
         public DbSet<Proveedor> Proveedores { get; set; }
         public DbSet<Factura> Facturas { get; set; }
 
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Detalle>()
+            .HasOne<Producto>().WithMany()
+            .HasForeignKey(p => p.ProductoId);
+
+            modelBuilder.Entity<Factura>()
+            .HasOne<UsuarioInteresado>().WithMany()
+            .HasForeignKey( f => f.InteresadoId );
+        }
     }
 }

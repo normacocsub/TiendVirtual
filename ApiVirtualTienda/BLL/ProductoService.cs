@@ -29,10 +29,15 @@ namespace BLL
                 if(response == null)
                 {
                     var responseProvedoor = _serviceProveedor.RegistrarProveedor(producto.Proveedor);
+                    producto.CalcularTotal();
                     if(responseProvedoor.Estado != "Registrado")
                     {
-                        _context.Productos.Add(producto);
+                        if(responseProvedoor.Error)
+                        {
+                            return new GuardarProductoResponse($"Error {responseProvedoor.Mensaje}", "Error");
+                        }
                     }
+                    _context.Productos.Add(producto);
                     _context.SaveChanges();
                     return new GuardarProductoResponse(producto);
                 }
@@ -59,6 +64,45 @@ namespace BLL
             {
                 return new ConsultarProductoResponse($"Error en la aplicacion: {e.Message}","Error");
             }
+        }
+
+        public BuscarProductoResponse BuscarProducto(string codigo)
+        {
+            try
+            {
+                var response = _context.Productos.Find(codigo);
+                if(response != null)
+                {
+                    return new BuscarProductoResponse(response);
+                }
+                else
+                {
+                    return new BuscarProductoResponse("No existe el producto", "NoEiste");
+                }
+            }
+            catch(Exception e)
+            {
+                return new BuscarProductoResponse($"Error en la aplicacion: {e.Message}","Error");
+            }
+        }
+
+        public class BuscarProductoResponse
+        {
+            public BuscarProductoResponse(Producto producto )
+            {
+                Error = false;
+                Producto = producto;
+            }
+            public BuscarProductoResponse(string mensaje, string estado)
+            {
+                Error = true;
+                Mensaje = mensaje;
+                Estado = estado;
+            }
+            public bool Error { get; set; }
+            public string Mensaje { get; set; }
+            public string Estado { get; set; }
+            public Producto Producto { get; set; }
         }
 
 

@@ -13,3 +13,18 @@ C:\Users\norma\Desktop\Prueba DevZero\DAL\obj\Debug\net5.0\DAL.csproj.CopyComple
 C:\Users\norma\Desktop\Prueba DevZero\DAL\obj\Debug\net5.0\DAL.dll
 C:\Users\norma\Desktop\Prueba DevZero\DAL\obj\Debug\net5.0\ref\DAL.dll
 C:\Users\norma\Desktop\Prueba DevZero\DAL\obj\Debug\net5.0\DAL.pdb
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\bin\Debug\net5.0\DAL.deps.json
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\bin\Debug\net5.0\DAL.dll
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\bin\Debug\net5.0\ref\DAL.dll
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\bin\Debug\net5.0\DAL.pdb
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\bin\Debug\net5.0\Entity.dll
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\bin\Debug\net5.0\Entity.pdb
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\DAL.csprojAssemblyReference.cache
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\DAL.csproj.CopyComplete
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\DAL.dll
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\ref\DAL.dll
+C:\Users\norma\Desktop\PruebaDevZero\ApiVirtualTienda\DAL\obj\Debug\net5.0\DAL.pdb

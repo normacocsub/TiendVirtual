@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\norma\\Desktop\\Prueba DevZero\\BLL\\BLL.csproj": {}
+    "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\BLL\\BLL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\norma\\Desktop\\Prueba DevZero\\BLL\\BLL.csproj": {
+    "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\BLL\\BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\BLL\\BLL.csproj",
+        "projectUniqueName": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\BLL\\BLL.csproj",
         "projectName": "BLL",
-        "projectPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\BLL\\BLL.csproj",
+        "projectPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\BLL\\BLL.csproj",
         "packagesPath": "C:\\Users\\norma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\BLL\\obj\\",
+        "outputPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -32,11 +32,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\norma\\Desktop\\Prueba DevZero\\DAL\\DAL.csproj": {
-                "projectPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\DAL\\DAL.csproj"
+              "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\DAL\\DAL.csproj"
               },
-              "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj": {
-                "projectPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj"
+              "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj": {
+                "projectPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj"
               }
             }
           }
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\norma\\Desktop\\Prueba DevZero\\DAL\\DAL.csproj": {
+    "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\DAL\\DAL.csproj",
+        "projectUniqueName": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\DAL\\DAL.csproj",
+        "projectPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\norma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\DAL\\obj\\",
+        "outputPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -97,8 +97,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj": {
-                "projectPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj"
+              "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj": {
+                "projectPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj"
               }
             }
           }
@@ -141,14 +141,14 @@
         }
       }
     },
-    "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj": {
+    "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj",
+        "projectUniqueName": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj",
         "projectName": "Entity",
-        "projectPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj",
+        "projectPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj",
         "packagesPath": "C:\\Users\\norma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\obj\\",
+        "outputPath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

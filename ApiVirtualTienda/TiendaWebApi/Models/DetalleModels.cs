@@ -10,6 +10,7 @@ namespace TiendaWebApi.Models
         public decimal IVA { get; set; }
         public decimal ValorTotal { get; set; }
         public decimal ValorUnitario { get; set; }
+        public int Cantidad { get; set; }
         public ProductoInputModels Producto { get; set; }
     }
 

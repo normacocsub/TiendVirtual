@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Orii2TM0KKVLmWOfBdt/0S+q2wGL4CAG2OZ026G6WLp7LFvMkUJX+SnSPzgEU6UUp772YMZWbzNLE3UWYPfi0w==",
+  "dgSpecHash": "sLI181YkFdxwZ5oWZlboTYvdlUJKIt8GUMIuYpBwgJYuFZ6Xcr1jrtrKX2igMpRp5o012A/OfDr57HjzuRB4PQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\DAL\\DAL.csproj",
+  "projectFilePath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\norma\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\norma\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

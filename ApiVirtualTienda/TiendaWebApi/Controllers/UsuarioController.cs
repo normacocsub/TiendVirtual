@@ -18,7 +18,7 @@ namespace TiendaWeb.Controllers
         public UsuarioController(TiendaVirtualContext context)
         {
             _context = context;
-            var usuarioResponse = _context.Usuarios.Find("lider");
+            var usuarioResponse = _context.Usuarios.Find("lider@gmail.com");
 
             if(usuarioResponse == null)
             {

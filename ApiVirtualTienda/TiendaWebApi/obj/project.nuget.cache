@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z9uP1Z/ueQaXnFhst0Zwi0KadXP0kzlAjzSmXxIdN/BVgbLXZE4mSPPlS8/kOolGwYeqlXkR0up+aAdidaGMTw==",
+  "dgSpecHash": "gIKqX4Kd3VHpmPQKh/L5gYaJy5QSG69IR20jFNte6oZ7vhzVEDVAQI5sIZMtKwafKKGaIO47msjtSYE3pGOxMA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\TiendaWebApi\\TiendaWebApi.csproj",
+  "projectFilePath": "C:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\TiendaWebApi\\TiendaWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\norma\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\norma\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -117,11 +117,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj",
+      "projectUniqueName": "c:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj",
       "projectName": "Entity",
-      "projectPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\Entity.csproj",
+      "projectPath": "c:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\Entity.csproj",
       "packagesPath": "C:\\Users\\norma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\norma\\Desktop\\Prueba DevZero\\Entity\\obj\\",
+      "outputPath": "c:\\Users\\norma\\Desktop\\PruebaDevZero\\ApiVirtualTienda\\Entity\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

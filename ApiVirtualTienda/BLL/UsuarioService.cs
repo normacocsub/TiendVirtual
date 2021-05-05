@@ -42,7 +42,7 @@ namespace BLL
                 if(response == null)
                 {
                     var usuarioResponse = _context.Usuarios.Find(interesado.Usuario.Email);
-                    if(usuarioResponse.Email == null)
+                    if(usuarioResponse == null)
                     {
                         _context.Interesados.Add(interesado);
                         _context.SaveChanges();
