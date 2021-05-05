@@ -1,3 +1,4 @@
+using System.Linq;
 using BLL;
 using DAL;
 using Entity;
@@ -74,12 +75,58 @@ namespace TiendaWeb.Controllers
             }
             return Ok(response.Interesado);
         }
+
+        [HttpPut("ActualizarInfo")]
+        public ActionResult<UsuarioViewModel> ActualizarInformacionUsuario(UsuarioInputModel usuarioInput)
+        {
+            Usuario usuario = MapearUsuario(usuarioInput);
+            var response = _serviceUsuario.ActualizarDatos(usuario);
+            if(response.Error)
+            {
+                ModelState.AddModelError("Error al actualizar el usuario", response.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(response.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                if(response.Estado == "NoExiste")
+                {
+                    detallesproblemas.Status = StatusCodes.Status404NotFound;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(response.Usuario);
+        }
+
+        [HttpGet("Interesados")]
+        public ActionResult<InteresadoViewModel> ConsultarInteresados()
+        {
+            var response = _serviceUsuario.ConsultarInteresados();
+            if(response.Error)
+            {
+                ModelState.AddModelError("Error al consultar los interesados", response.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(response.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(response.Interesados.Select(i => new InteresadoViewModel(i)));
+        }
         private Usuario MapearUsuario(UsuarioInputModel usuarioInput)
         {
             var usuario = new Usuario
             {
                 Email = usuarioInput.Email,
                 Password = usuarioInput.Password,
+                Role = "Ventas",
+                Apellidos = usuarioInput.Apellidos,
+                Nombres = usuarioInput.Nombres,
+                Sexo = usuarioInput.Sexo,
+                Telefono = usuarioInput.Sexo
             };
             return usuario;
         }
@@ -92,7 +139,11 @@ namespace TiendaWeb.Controllers
                 Usuario = new Usuario{
                     Email = interesadoInput.Usuario.Email,
                     Password = interesadoInput.Usuario.Password,
-                    Role = interesadoInput.Usuario.Role
+                    Role = "Interesado",
+                    Apellidos = interesadoInput.Usuario.Apellidos,
+                    Nombres = interesadoInput.Usuario.Nombres,
+                    Sexo = interesadoInput.Usuario.Sexo,
+                    Telefono = interesadoInput.Usuario.Sexo
                 }
             };
             return interesado;

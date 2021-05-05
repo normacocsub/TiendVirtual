@@ -104,6 +104,28 @@ namespace TiendaWebApi.Controllers
             return Ok(response.Productos.Select(p => new ProductoViewModel(p)));
         }
 
+        [HttpPut("ActualizarEstado/{codigo}/{estado}")]
+        public ActionResult<ProductoViewModel> ActualizarEstadoProducto(string codigo, string estado)
+        {
+            var response = _serviceProducto.ActualizarEstado(codigo, estado);
+            if(response.Error)
+            {
+                ModelState.AddModelError("Error al editar el producto", response.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(response.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                if(response.Estado == "NoExiste")
+                {
+                    detallesproblemas.Status = StatusCodes.Status404NotFound;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(response.Producto);
+        }
+
         private Producto MapearProducto(ProductoInputModels productoInput)
         {
             var producto = new Producto

@@ -14,6 +14,7 @@ namespace Entity
         public decimal IVA { get; set; }
         public decimal Descuento { get; set; }
         public int Cantidad { get; set; }
+        public string Estado { get; set; }
         public decimal Total { get; set; }
         [NotMapped]
         public Detalle Detalle { get; set; }

@@ -12,6 +12,7 @@ namespace Entity
         public string Descripcion { get; set; }
         public int Cantidad { get; set; }
         public DateTime Fecha { get; set; }
+        public string Estado { get; set; }
         public decimal Descuento { get; set; }
         [NotMapped]
         public Proveedor Proveedor { get; set; }

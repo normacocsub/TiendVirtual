@@ -71,6 +71,9 @@ namespace DAL.Migrations
                     b.Property<decimal>("Descuento")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("IVA")
                         .HasColumnType("decimal(18,2)");
 
@@ -107,6 +110,9 @@ namespace DAL.Migrations
                     b.Property<decimal>("Descuento")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -114,7 +120,7 @@ namespace DAL.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProveedorNIT")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("ValorDescontado")
                         .HasColumnType("decimal(18,2)");
@@ -126,6 +132,8 @@ namespace DAL.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Codigo");
+
+                    b.HasIndex("ProveedorNIT");
 
                     b.ToTable("Productos");
                 });
@@ -194,6 +202,13 @@ namespace DAL.Migrations
                     b.HasOne("Entity.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UsuarioVentasId");
+                });
+
+            modelBuilder.Entity("Entity.Producto", b =>
+                {
+                    b.HasOne("Entity.Proveedor", null)
+                        .WithMany()
+                        .HasForeignKey("ProveedorNIT");
                 });
 
             modelBuilder.Entity("Entity.UsuarioInteresado", b =>

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DAL;
 using Entity;
@@ -77,6 +78,81 @@ namespace BLL
             {
                 return new GuardarFacturaResponse($"Error en la aplicacion: {e.Message}","Error");
             }
+        }
+
+        public EditarFacturaResponse ActualizarEstadoFactura(string codigo, string estado)
+        {
+            try
+            {
+                var response = _context.Facturas.Find(codigo);
+                if(response != null)
+                {
+                    response.Estado = estado;
+                    _context.Facturas.Update(response);
+                    _context.SaveChanges();
+                    return new EditarFacturaResponse(response);
+                }
+                else
+                {
+                    return new EditarFacturaResponse("No Existe la factura", "NoExiste");
+                }
+            }
+            catch(Exception e)
+            {
+                return new EditarFacturaResponse($"Error en la aplicacion: {e.Message}","Error");
+            }
+        }
+
+        public ConsultarFacturasResponse Consultar()
+        {
+            try
+            {
+                var facturas = _context.Facturas.OrderBy(f => f.Estado).ToList();
+                return new ConsultarFacturasResponse(facturas);
+            }
+            catch(Exception e)
+            {
+                return new ConsultarFacturasResponse($"Error en la aplicacion: {e.Message}","Error");
+            }
+        }
+
+
+        public class ConsultarFacturasResponse
+        {
+            public ConsultarFacturasResponse(List<Factura> facturas)
+            {
+                Error = false;
+                Facturas = facturas;
+            }
+            public ConsultarFacturasResponse(string mensaje, string estado)
+            {
+                Error = true;
+                Mensaje = mensaje;
+                Estado = estado;
+            }
+            public bool Error { get; set; }
+            public string Mensaje { get; set; }
+            public string Estado { get; set; }
+            public List<Factura> Facturas { get; set; }
+        }
+
+        public class EditarFacturaResponse
+        {
+            public EditarFacturaResponse(Factura factura)
+            {
+                Error = false;
+                Factura = factura;
+            }
+            public EditarFacturaResponse(string mensaje, string estado)
+            {
+                Error = true;
+                Mensaje = mensaje;
+                Estado = estado;
+            }
+            public bool Error { get; set; }
+            public string Mensaje { get; set; }
+            public string Estado { get; set; }
+            public Factura Factura { get; set; }
         }
 
         public class GuardarFacturaResponse

@@ -1,3 +1,4 @@
+using System.Linq;
 using BLL;
 using DAL;
 using Entity;
@@ -43,6 +44,42 @@ namespace TiendaWebApi.Controllers
             return Ok(response.Factura);
         }
 
+        [HttpPut("Update/{codigo}/{estado}")]
+        public ActionResult<FacturaViewModels> ActualizarEstado(string codigo, string estado)
+        {
+            var result = _serviceFactura.ActualizarEstadoFactura(codigo,estado);
+            if(result.Error)
+            {
+                ModelState.AddModelError("Error al actualizar la factura", result.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(result.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                if(result.Estado == "NoExiste")
+                {
+                    detallesproblemas.Status = StatusCodes.Status404NotFound;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(result.Factura);
+        }
+
+        [HttpGet]
+        public ActionResult<FacturaViewModels> ConsultarFacturas()
+        {
+            var result = _serviceFactura.Consultar();
+            if(result.Error)
+            {
+                ModelState.AddModelError("Error al crear la factura", result.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+                detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(result.Facturas.Select(f => new FacturaViewModels(f)));
+        }
+
         private Factura MapearFactura(FacturaInputModels facturaInput)
         {
             var factura = new Factura();
@@ -50,11 +87,12 @@ namespace TiendaWebApi.Controllers
                 var detalle = new Detalle
                 {
                     Cantidad = d.Cantidad,
-                    Producto = _serviceProducto.BuscarProducto(d.Producto.Codigo).Producto,
+                    Producto = _serviceProducto.BuscarProducto(d.CodigoProducto).Producto,
                 };
                 factura.AgregarDetalle(detalle);
             });
-            factura.InteresadoId = facturaInput.Interesado.NIT;
+            factura.InteresadoId = facturaInput.InteresadoId;
+            factura.UsuarioVentasId = facturaInput.UsuarioVentasId;
             factura.CalcularTotal();
             return factura;
         }

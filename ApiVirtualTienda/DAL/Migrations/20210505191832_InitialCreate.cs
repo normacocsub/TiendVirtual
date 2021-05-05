@@ -8,26 +8,6 @@ namespace DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Productos",
-                columns: table => new
-                {
-                    Codigo = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ProveedorNIT = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IVA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorDescontado = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Productos", x => x.Codigo);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Proveedores",
                 columns: table => new
                 {
@@ -50,6 +30,33 @@ namespace DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Email);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Productos",
+                columns: table => new
+                {
+                    Codigo = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProveedorNIT = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IVA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorDescontado = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Productos", x => x.Codigo);
+                    table.ForeignKey(
+                        name: "FK_Productos_Proveedores_ProveedorNIT",
+                        column: x => x.ProveedorNIT,
+                        principalTable: "Proveedores",
+                        principalColumn: "NIT",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +86,7 @@ namespace DAL.Migrations
                     IVA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UsuarioVentasId = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -155,15 +163,17 @@ namespace DAL.Migrations
                 name: "IX_Interesados_UsuarioEmail",
                 table: "Interesados",
                 column: "UsuarioEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Productos_ProveedorNIT",
+                table: "Productos",
+                column: "ProveedorNIT");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Detalle");
-
-            migrationBuilder.DropTable(
-                name: "Proveedores");
 
             migrationBuilder.DropTable(
                 name: "Facturas");
@@ -173,6 +183,9 @@ namespace DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Interesados");
+
+            migrationBuilder.DropTable(
+                name: "Proveedores");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

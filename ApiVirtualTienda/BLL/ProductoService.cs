@@ -36,7 +36,10 @@ namespace BLL
                     {
                         if(responseProvedoor.Error)
                         {
-                            return new GuardarProductoResponse($"Error {responseProvedoor.Mensaje}", "Error");
+                            if(responseProvedoor.Estado == "Error")
+                            {
+                                return new GuardarProductoResponse($"Error {responseProvedoor.Mensaje}", "Error");
+                            }
                         }
                     }
                     Detalle detalle = new Detalle(){Producto = producto};
@@ -164,6 +167,27 @@ namespace BLL
             {
                 return new EditarProductoResponse($"Error en la aplicacion: {e.Message}","Error");
             }
+        }
+
+        public EditarProductoResponse ActualizarEstado(string codigo, string estado)
+        {
+            try
+            {
+                var response = _context.Productos.Find(codigo);
+                if(response != null)
+                {
+                    response.Estado = estado;
+                    _context.Productos.Update(response);
+                    _context.SaveChanges();
+                    return new EditarProductoResponse(response);
+                }
+                return new EditarProductoResponse("No existe el producto", "NoExiste");
+            }
+            catch(Exception e)
+            {
+                return new EditarProductoResponse($"Error en la aplicacion: {e.Message}","Error");
+            }
+
         }
 
         public class EditarProductoResponse
