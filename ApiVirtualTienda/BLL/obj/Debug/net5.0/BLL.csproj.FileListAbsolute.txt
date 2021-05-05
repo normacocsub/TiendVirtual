@@ -1,0 +1,17 @@
+C:\Users\norma\Desktop\Prueba DevZero\BLL\bin\Debug\net5.0\BLL.deps.json
+C:\Users\norma\Desktop\Prueba DevZero\BLL\bin\Debug\net5.0\BLL.dll
+C:\Users\norma\Desktop\Prueba DevZero\BLL\bin\Debug\net5.0\ref\BLL.dll
+C:\Users\norma\Desktop\Prueba DevZero\BLL\bin\Debug\net5.0\BLL.pdb
+C:\Users\norma\Desktop\Prueba DevZero\BLL\bin\Debug\net5.0\DAL.dll
+C:\Users\norma\Desktop\Prueba DevZero\BLL\bin\Debug\net5.0\Entity.dll
+C:\Users\norma\Desktop\Prueba DevZero\BLL\bin\Debug\net5.0\DAL.pdb
+C:\Users\norma\Desktop\Prueba DevZero\BLL\bin\Debug\net5.0\Entity.pdb
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\BLL.csprojAssemblyReference.cache
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\BLL.AssemblyInfoInputs.cache
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\BLL.AssemblyInfo.cs
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\BLL.csproj.CoreCompileInputs.cache
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\BLL.csproj.CopyComplete
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\BLL.dll
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\ref\BLL.dll
+C:\Users\norma\Desktop\Prueba DevZero\BLL\obj\Debug\net5.0\BLL.pdb

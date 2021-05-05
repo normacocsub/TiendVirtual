@@ -1,0 +1,50 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+
+namespace Entity
+{
+    public class Factura
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public string Codigo { get; set; }
+        public decimal IVA { get; set; }
+        public decimal Descuento { get; set; }
+        public int Cantidad { get; set; }
+        public decimal Total { get; set; }
+        [NotMapped]
+        public Detalle Detalle { get; set; }
+        public List<Detalle> Detalles { get; set; }
+
+        public Factura()
+        {
+            Detalles = new List<Detalle>();
+        }
+
+        public decimal CalcularTotalDescuento()
+        {
+            return Descuento = Detalles.Sum(f => f.Descuento);
+        }
+
+        public decimal CalcularTotalIVA()
+        {
+            return IVA = Detalles.Sum(f => f.IVA);
+        }
+
+        public decimal CalcularCantidad()
+        {
+            return Cantidad = Detalles.Count;
+        }
+
+        public decimal CalcularTotal()
+        {
+            CalcularTotalDescuento();
+            CalcularTotalIVA();
+            CalcularCantidad();
+            return Total = Detalles.Sum(f => f.ValorTotal);
+        }
+        
+    }
+}
