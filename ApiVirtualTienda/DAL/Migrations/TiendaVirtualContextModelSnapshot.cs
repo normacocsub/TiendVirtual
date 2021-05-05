@@ -80,9 +80,14 @@ namespace DAL.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("UsuarioVentasId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Codigo");
 
                     b.HasIndex("InteresadoId");
+
+                    b.HasIndex("UsuarioVentasId");
 
                     b.ToTable("Facturas");
                 });
@@ -185,6 +190,10 @@ namespace DAL.Migrations
                     b.HasOne("Entity.UsuarioInteresado", null)
                         .WithMany()
                         .HasForeignKey("InteresadoId");
+
+                    b.HasOne("Entity.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("UsuarioVentasId");
                 });
 
             modelBuilder.Entity("Entity.UsuarioInteresado", b =>

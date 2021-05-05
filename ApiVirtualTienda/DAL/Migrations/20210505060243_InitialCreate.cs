@@ -80,7 +80,8 @@ namespace DAL.Migrations
                     Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UsuarioVentasId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,6 +91,12 @@ namespace DAL.Migrations
                         column: x => x.InteresadoId,
                         principalTable: "Interesados",
                         principalColumn: "NIT",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Facturas_Usuarios_UsuarioVentasId",
+                        column: x => x.UsuarioVentasId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Email",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -138,6 +145,11 @@ namespace DAL.Migrations
                 name: "IX_Facturas_InteresadoId",
                 table: "Facturas",
                 column: "InteresadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Facturas_UsuarioVentasId",
+                table: "Facturas",
+                column: "UsuarioVentasId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Interesados_UsuarioEmail",

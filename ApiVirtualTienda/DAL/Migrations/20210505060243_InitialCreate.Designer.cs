@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(TiendaVirtualContext))]
-    [Migration("20210505035423_InitialCreate")]
+    [Migration("20210505060243_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,9 +82,14 @@ namespace DAL.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("UsuarioVentasId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Codigo");
 
                     b.HasIndex("InteresadoId");
+
+                    b.HasIndex("UsuarioVentasId");
 
                     b.ToTable("Facturas");
                 });
@@ -187,6 +192,10 @@ namespace DAL.Migrations
                     b.HasOne("Entity.UsuarioInteresado", null)
                         .WithMany()
                         .HasForeignKey("InteresadoId");
+
+                    b.HasOne("Entity.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("UsuarioVentasId");
                 });
 
             modelBuilder.Entity("Entity.UsuarioInteresado", b =>

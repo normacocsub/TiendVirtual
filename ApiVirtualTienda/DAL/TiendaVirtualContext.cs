@@ -24,6 +24,10 @@ namespace DAL
             modelBuilder.Entity<Factura>()
             .HasOne<UsuarioInteresado>().WithMany()
             .HasForeignKey( f => f.InteresadoId );
+
+            modelBuilder.Entity<Factura>()
+            .HasOne<Usuario>().WithMany()
+            .HasForeignKey( f => f.UsuarioVentasId );
         }
     }
 }

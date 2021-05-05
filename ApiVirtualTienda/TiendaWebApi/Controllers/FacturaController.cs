@@ -54,6 +54,7 @@ namespace TiendaWebApi.Controllers
                 };
                 factura.AgregarDetalle(detalle);
             });
+            factura.InteresadoId = facturaInput.Interesado.NIT;
             factura.CalcularTotal();
             return factura;
         }

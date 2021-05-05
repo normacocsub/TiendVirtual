@@ -7,5 +7,10 @@ namespace Entity
         [Key]
         public string NIT { get; set; }
         public Usuario Usuario { get; set; }
+
+        public UsuarioInteresado()
+        {
+            
+        }
     }
 }

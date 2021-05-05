@@ -41,6 +41,51 @@ namespace TiendaWebApi.Controllers
             return Ok(response.Producto);
         }
 
+        [HttpPut]
+        public ActionResult<ProductoViewModel> Actualizar(ProductoInputModels productoInput)
+        {
+            Producto producto = MapearProducto(productoInput);
+            var response = _serviceProducto.EditarProducto(producto);
+            if(response.Error)
+            {
+                ModelState.AddModelError("Error al editar el producto", response.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(response.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                if(response.Estado == "NoExiste")
+                {
+                    detallesproblemas.Status = StatusCodes.Status404NotFound;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(response.Producto);
+        }
+
+        [HttpPut("UpdateCantidad/{cantidad}/{codigo}")]
+        public ActionResult<ProductoViewModel> ActualizarCantidad(int cantidad, string codigo)
+        {
+            var response = _serviceProducto.ActualizarCantidad(cantidad, codigo);
+            if(response.Error)
+            {
+                ModelState.AddModelError("Error al editar el producto", response.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(response.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                if(response.Estado == "NoExiste")
+                {
+                    detallesproblemas.Status = StatusCodes.Status404NotFound;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(response.Producto);
+        }
+
         [HttpGet]
         public ActionResult<ProductoViewModel> ConsultarProductos()
         {
@@ -70,6 +115,8 @@ namespace TiendaWebApi.Controllers
                 Fecha = productoInput.Fecha,
                 ProveedorNIT = productoInput.IdProveedor,
                 ValorUnitario = productoInput.ValorUnitario,
+                IVA = productoInput.IVA,
+                ValorDescontado = productoInput.ValorDescontado,
                 Proveedor = new Proveedor{
                      NIT = productoInput.Proveedor.NIT,
                      Nombre = productoInput.Proveedor.Nombre,       

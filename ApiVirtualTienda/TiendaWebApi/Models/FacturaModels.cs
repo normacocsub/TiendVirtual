@@ -11,6 +11,7 @@ namespace TiendaWebApi.Models
         public decimal Total { get; set; }
         public DetalleInputModels Detalle { get; set; }
         public List<DetalleInputModels> Detalles { get; set; }
+        public InteresadoInputModels Interesado { get; set; }
     }
 
     public class FacturaViewModels : FacturaInputModels

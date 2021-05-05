@@ -89,7 +89,11 @@ namespace TiendaWeb.Controllers
             var interesado = new UsuarioInteresado
             {
                 NIT = interesadoInput.NIT,
-                Usuario = interesadoInput.Usuario,
+                Usuario = new Usuario{
+                    Email = interesadoInput.Usuario.Email,
+                    Password = interesadoInput.Usuario.Password,
+                    Role = interesadoInput.Usuario.Role
+                }
             };
             return interesado;
         }
