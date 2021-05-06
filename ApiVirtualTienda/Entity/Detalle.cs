@@ -39,6 +39,10 @@ namespace Entity
         {
             CalcularDescuento();
             CalcularIVA();
+            if(Descuento == 100)
+            {
+                return ValorTotal = 0;
+            }
             return ValorTotal = ( IVA + (ValorUnitario - ValorDescuento )) * Cantidad;
         }
     }

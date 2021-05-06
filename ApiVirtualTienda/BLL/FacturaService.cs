@@ -63,6 +63,7 @@ namespace BLL
             {
                 Factura factura = new Factura();
                 factura.EstadoTransaccion = "Compra";
+                factura.Estado = "Activo";
                 detalle.Producto.Codigo = (_context.Productos.ToList().Count + 1).ToString();
                 _context.Productos.Add(detalle.Producto);
                 detalle.Cantidad = detalle.Producto.Cantidad;

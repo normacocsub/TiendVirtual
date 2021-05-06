@@ -99,10 +99,12 @@ export class RegistroProductoComponent implements OnInit {
   onSubmit() {
     if (this.proveedorRegistrado) {
       if (this.formGroupProveedor?.invalid) {
+        this.crearMensajeInfoToast("No se ha registrado el proveedor");
         return;
       }
     } else {
       if (this.selectedProveedor.nit == '') {
+        this.crearMensajeInfoToast("No se ha seleccionado el proveedor");
         return;
       }
     }
