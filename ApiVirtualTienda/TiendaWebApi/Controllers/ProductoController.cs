@@ -38,7 +38,7 @@ namespace TiendaWebApi.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(response.Producto);
+            return Ok(new ProductoViewModel(response.Producto));
         }
 
         [HttpPut]
@@ -61,7 +61,7 @@ namespace TiendaWebApi.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(response.Producto);
+            return Ok(new ProductoViewModel(response.Producto));
         }
 
         [HttpPut("UpdateCantidad/{cantidad}/{codigo}")]
@@ -83,7 +83,7 @@ namespace TiendaWebApi.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(response.Producto);
+            return Ok(new ProductoViewModel(response.Producto));
         }
 
         [HttpGet]
@@ -92,7 +92,7 @@ namespace TiendaWebApi.Controllers
             var response = _serviceProducto.ConsultarProductos();
             if(response.Error)
             {
-                ModelState.AddModelError("Error al guardar el producto", response.Mensaje);
+                ModelState.AddModelError("Error al consultar los productos", response.Mensaje);
                 var detallesproblemas = new ValidationProblemDetails(ModelState);
 
                 if(response.Estado == "Error")
@@ -123,7 +123,7 @@ namespace TiendaWebApi.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(response.Producto);
+            return Ok(new ProductoViewModel(response.Producto));
         }
 
         private Producto MapearProducto(ProductoInputModels productoInput)
@@ -135,13 +135,15 @@ namespace TiendaWebApi.Controllers
                 Descripcion = productoInput.Descripcion,
                 Descuento = productoInput.Descuento,
                 Fecha = productoInput.Fecha,
-                ProveedorNIT = productoInput.IdProveedor,
+                ProveedorNIT = productoInput.Proveedor.NIT,
                 ValorUnitario = productoInput.ValorUnitario,
                 IVA = productoInput.IVA,
                 ValorDescontado = productoInput.ValorDescontado,
+                Estado = "Activo",
                 Proveedor = new Proveedor{
                      NIT = productoInput.Proveedor.NIT,
-                     Nombre = productoInput.Proveedor.Nombre,       
+                     Nombre = productoInput.Proveedor.Nombre,
+                     Telefono = productoInput.Proveedor.Telefono      
                 }
             };
             return producto;

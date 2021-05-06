@@ -10,6 +10,7 @@ namespace TiendaWebApi.Models
         public decimal Descuento { get; set; }
         public int Cantidad { get; set; }
         public string Estado { get; set; }
+        public string EstadoTransaccion { get; set; }
         public decimal Total { get; set; }
         public List<DetalleInputModels> Detalles { get; set; }
         public string InteresadoId { get; set; }
@@ -32,17 +33,11 @@ namespace TiendaWebApi.Models
             Cantidad = factura.Cantidad;
             Estado = factura.Estado;
             Total = factura.Total;
+            InteresadoId = factura.InteresadoId;
+            UsuarioVentasId = factura.UsuarioVentasId;
+            EstadoTransaccion = factura.EstadoTransaccion;
             factura.Detalles.ForEach(d => {
-                var detalle = new DetalleInputModels{
-                    Codigo = d.Codigo,
-                    Cantidad = d.Cantidad,
-                    Descuento = d.Descuento,
-                    Fecha = d.Fecha,
-                    IVA = d.IVA,
-                    CodigoProducto = d.ProductoId,
-                    ValorTotal = d.ValorTotal,
-                    ValorUnitario = d.ValorUnitario
-                };
+                var detalle = new DetalleViewModel(d);
                 Detalles.Add(detalle);
             });
 

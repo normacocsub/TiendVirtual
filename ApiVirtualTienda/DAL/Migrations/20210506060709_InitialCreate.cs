@@ -12,7 +12,8 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     NIT = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,6 +26,11 @@ namespace DAL.Migrations
                 {
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nombres = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Apellidos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sexo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -45,8 +51,7 @@ namespace DAL.Migrations
                     ProveedorNIT = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IVA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorDescontado = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -87,9 +92,12 @@ namespace DAL.Migrations
                     Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EstadoTransaccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UsuarioVentasId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UsuarioVentasId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorSinDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,6 +126,7 @@ namespace DAL.Migrations
                     IVA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
+                    ValorDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProductoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     FacturaCodigo = table.Column<int>(type: "int", nullable: true)

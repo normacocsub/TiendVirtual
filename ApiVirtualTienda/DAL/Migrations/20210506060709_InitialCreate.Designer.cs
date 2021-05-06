@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(TiendaVirtualContext))]
-    [Migration("20210505191832_InitialCreate")]
+    [Migration("20210506060709_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,9 @@ namespace DAL.Migrations
                     b.Property<string>("ProductoId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<decimal>("ValorDescuento")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("decimal(18,2)");
 
@@ -76,17 +79,26 @@ namespace DAL.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("EstadoTransaccion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("IVA")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("InteresadoId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UsuarioVentasId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("ValorSinDescuento")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Codigo");
 
@@ -127,9 +139,6 @@ namespace DAL.Migrations
                     b.Property<decimal>("ValorDescontado")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("ValorUnitario")
                         .HasColumnType("decimal(18,2)");
 
@@ -148,6 +157,9 @@ namespace DAL.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("NIT");
 
                     b.ToTable("Proveedores");
@@ -158,10 +170,25 @@ namespace DAL.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Apellidos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombres")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sexo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Email");

@@ -16,6 +16,7 @@ namespace TiendaWebApi.Models
         public ProveedorInputModels Proveedor { get; set; }
         public string IdProveedor { get; set; }
         public decimal ValorUnitario { get; set; }
+        public string Estado { get; set; }
     }
 
     public class ProductoViewModel : ProductoInputModels
@@ -29,12 +30,10 @@ namespace TiendaWebApi.Models
             Cantidad = producto.Cantidad;
             Fecha = producto.Fecha;
             Descuento = producto.Descuento;
-            Proveedor = new ProveedorInputModels{
-                NIT = producto.Proveedor.NIT,
-                Nombre = producto.Proveedor.Nombre,
-            };
+            Proveedor = new ProveedorViewModels(producto.Proveedor);
             IdProveedor = producto.ProveedorNIT;
             ValorUnitario = producto.ValorUnitario;
+            Estado = producto.Estado;
         }
     }
 }

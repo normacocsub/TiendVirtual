@@ -14,9 +14,32 @@ namespace Entity
         public decimal IVA { get; set; }
         public decimal ValorTotal { get; set; }
         public int Cantidad { get; set; }
+        public decimal ValorDescuento { get; set; }
         public decimal ValorUnitario { get; set; }
         [NotMapped]
         public Producto Producto { get; set; }
         public string ProductoId { get; set; }
+
+        public Detalle()
+        {
+            
+        }
+
+        public decimal CalcularDescuento()
+        {
+            return ValorDescuento = ( ValorUnitario * ( Descuento / 100 ));
+        }
+
+        public decimal CalcularIVA()
+        {
+            return IVA = ( ValorUnitario * 0.19m );
+        }
+
+        public decimal CalcularTotal()
+        {
+            CalcularDescuento();
+            CalcularIVA();
+            return ValorTotal = ( IVA + (ValorUnitario - ValorDescuento )) * Cantidad;
+        }
     }
 }

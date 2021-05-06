@@ -28,6 +28,7 @@ namespace BLL
                 var response = _context.Facturas.Find(factura.Codigo);
                 if(response == null)
                 {
+                    factura.EstadoTransaccion = "Venta";
                     _context.Facturas.Add(factura);
                     bool estadoTransaction = false;
                     foreach (var item in factura.Detalles)
@@ -61,8 +62,8 @@ namespace BLL
             try
             {
                 Factura factura = new Factura();
+                factura.EstadoTransaccion = "Compra";
                 detalle.Producto.Codigo = (_context.Productos.ToList().Count + 1).ToString();
-                detalle.Producto.CalcularTotal();
                 _context.Productos.Add(detalle.Producto);
                 detalle.Cantidad = detalle.Producto.Cantidad;
                 
@@ -70,6 +71,7 @@ namespace BLL
                 factura.Descuento = descuento;
                 factura.CalcularCantidad();
                 factura.IVA = IVA;
+                factura.CalcularTotal();
                 _context.Facturas.Add(factura);
                 _context.SaveChanges();
                 return new GuardarFacturaResponse(factura);

@@ -14,16 +14,7 @@ namespace TiendaWebApi.Models
         public InteresadoViewModel(UsuarioInteresado interesado)
         {
             NIT = interesado.NIT;
-            Usuario = new UsuarioInputModel
-            {
-                Email = interesado.Usuario.Email,
-                Password = "",
-                Apellidos = interesado.Usuario.Apellidos,
-                Nombres = interesado.Usuario.Nombres,
-                Role = interesado.Usuario.Role,
-                Sexo = interesado.Usuario.Sexo,
-                Telefono = interesado.Usuario.Telefono,
-            };
+            Usuario = new UsuarioViewModel(interesado.Usuario);
         }
     }
 }

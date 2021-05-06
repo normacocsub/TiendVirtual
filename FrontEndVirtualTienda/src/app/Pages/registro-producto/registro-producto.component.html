@@ -1,0 +1,176 @@
+<form action=""  [formGroup]="formGroup">
+  <div class="card">
+    <h5>Registro Producto</h5>
+    <p-accordion>
+      <p-accordionTab header="Producto" [selected]="true">
+        
+        <div class="p-fluid">
+          <div class="p-field">
+            <span class="p-float-label">
+              <input id="float-input" formControlName="descripcion" type="text" pInputText />
+              <label for="float-input">Descripcion</label>
+            </span>
+          </div>
+          <br /><br />
+          <div class="p-field">
+            <span class="p-float-label">
+              <input id="float-input" formControlName="cantidad" type="number" pInputText />
+              <label for="float-input">Cantidad</label>
+            </span>
+          </div>
+          <br>
+          <div class="p-field">
+            <span class="p-float-label">
+              <input id="float-input" formControlName="valorUnitario" type="number" pInputText />
+              <label for="float-input">Valor Unitario</label>
+            </span>
+          </div>
+          <div>
+            <div class="p-field p-col-12 p-md-4">
+              <label for=""><h5>Fecha compra</h5></label>
+              <p-calendar formControlName="fecha"></p-calendar>
+            </div>
+          </div>
+
+          
+        </div>
+      </p-accordionTab>
+
+      <p-accordionTab header="Datos Compra">
+        <div class="p-fluid">
+            <div>
+                <h5>Descuento: {{ producto.descuento }}</h5>
+                <input
+                  type="text"
+                  pInputText
+                  [value]="producto.descuento"
+                  name="val2"
+                  readonly
+                />
+                <p-slider formControlName="descuento" (onChange)="handleChange($event)" name="val2"></p-slider>
+              </div>
+              <br />
+    
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input id="float-input" formControlName="valorDescontado" type="number" pInputText />
+                  <label for="float-input">Valor Descontado</label>
+                </span>
+              </div>
+              <br />
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input id="float-input" formControlName="iva" type="number" pInputText />
+                  <label for="float-input">IVA</label>
+                </span>
+              </div>
+              <br />
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input id="float-input" formControlName="valorTotal" type="number" pInputText />
+                  <label for="float-input">Valor Total</label>
+                </span>
+              </div>
+        </div>
+      </p-accordionTab>
+        <p-accordionTab header="Proveedor">
+            <h5>Proveedor</h5>
+            <p-tabView>
+
+
+                <p-tabPanel header="Seleccionar Proveedor" [selected]="true">
+                    <button type="text" pButton label="Seleccionar Proveedor" (click)="op.toggle($event)"></button>
+                    <h5>Nombre: {{selectedProveedor.nombre}}</h5>
+                    <p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '450px'}">
+                    
+                        <ng-template pTemplate>
+                            
+                            <p-table [value]="proveedores" selectionMode="single" [(selection)]="selectedProveedor" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="name">NIT<p-sortIcon field="name"></p-sortIcon></th>
+                                        <th pSortableColumn="price">Nombre <p-sortIcon field="price"></p-sortIcon></th>
+                                        <th pSortableColumn="price">Telefono <p-sortIcon field="price"></p-sortIcon></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-provee>
+                                    <tr [pSelectableRow]="rowData">
+                                        <td>{{provee.nit}}</td>
+                                        <td>{{provee.nombre}}</td>
+                                        <td>{{provee.telefono}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </ng-template>
+                    </p-overlayPanel>
+                 </p-tabPanel>
+
+
+                
+                    <p-tabPanel header="Registrar Proveedor">
+                        <p-toast></p-toast>
+    
+                        <form action=""  [formGroup]="formGroupProveedor">
+                        <div *ngIf="proveedorRegistrado==false">
+                            <div class="p-fluid">
+                                <div class="p-field">
+                                    <span class="p-float-label">
+                                      <input  formControlName="nit" id="float-input" type="text" pInputText />
+                                      <label for="float-input">NIT </label>
+                                    </span>
+                                </div>
+                                <br>
+                                <div class="p-field">
+                                    <span class="p-float-label">
+                                      <input formControlName="nombre" id="float-input" type="text" pInputText />
+                                      <label for="float-input">Nombre {{proveedor?.nombre}}</label>
+
+                                    </span>
+                                </div>
+                                <br>
+                                <div class="p-field">
+                                    <span class="p-float-label">
+                                      <input formControlName="telefono" id="float-input" type="text" pInputText />
+                                      <label for="float-input">Telefono {{proveedor?.telefono}}</label>
+                                    </span>
+                                </div>
+        
+        
+                            </div>
+                        </div>
+                        <div class="product-item" *ngIf="proveedorRegistrado"> 
+                            <br>
+                            <div class="product-list-detail">
+                                <i class="pi pi-user" style="font-size: 1rem"></i>
+                                <h5 class="p-mb-2">NIT: {{proveedor?.nit}}</h5>
+                               
+                                <span class="product-category">Nombre: {{proveedor?.nombre}}</span>
+                            </div>
+                            <div class="product-list-action">
+                                <h6 class="p-mb-2">Telefono: {{proveedor?.telefono}}</h6>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <span class="p-buttonset">
+                                <button (click)="onSubmitProveedor()" [disabled]="formGroupProveedor?.invalid" pButton type="button" label="Save" icon="pi pi-check"></button>
+                                <button (click)="borrarProveedor()" pButton type="button" label="Delete" icon="pi pi-trash"></button>
+                            </span>
+                        </div>
+                    </form>
+                     </p-tabPanel>
+                
+                 
+            </p-tabView>
+            
+            
+            
+        </p-accordionTab>
+    </p-accordion>
+    <br>
+    <div >
+        <button (click)="onSubmit()" pButton type="button"  [disabled]="formGroup?.invalid" class="p-mr-2 p-mb-2" label="Registrar Compra"></button>
+        <button class="p-mb-2" pButton type="button" label="Cancelar Compra" class="p-button-danger"></button>
+    </div>
+  </div>
+</form>

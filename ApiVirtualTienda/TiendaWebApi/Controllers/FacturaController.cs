@@ -41,7 +41,7 @@ namespace TiendaWebApi.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(response.Factura);
+            return Ok(new FacturaViewModels(response.Factura));
         }
 
         [HttpPut("Update/{codigo}/{estado}")]
@@ -63,7 +63,7 @@ namespace TiendaWebApi.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(result.Factura);
+            return Ok(new FacturaViewModels(result.Factura));
         }
 
         [HttpGet]
@@ -72,7 +72,7 @@ namespace TiendaWebApi.Controllers
             var result = _serviceFactura.Consultar();
             if(result.Error)
             {
-                ModelState.AddModelError("Error al crear la factura", result.Mensaje);
+                ModelState.AddModelError("Error al consultar las factura", result.Mensaje);
                 var detallesproblemas = new ValidationProblemDetails(ModelState);
                 detallesproblemas.Status = StatusCodes.Status500InternalServerError;
                 return BadRequest(detallesproblemas);
@@ -91,6 +91,7 @@ namespace TiendaWebApi.Controllers
                 };
                 factura.AgregarDetalle(detalle);
             });
+            factura.Estado = "Activo";
             factura.InteresadoId = facturaInput.InteresadoId;
             factura.UsuarioVentasId = facturaInput.UsuarioVentasId;
             factura.CalcularTotal();

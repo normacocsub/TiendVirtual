@@ -101,7 +101,6 @@ namespace BLL
                     response.Descripcion = producto.Descripcion;
                     response.Descuento = producto.Descuento;
                     response.ValorUnitario = producto.ValorUnitario;
-                    response.CalcularTotal();
                     _context.Productos.Update(response);
                     _context.SaveChanges();
                     return new EditarProductoResponse(response);

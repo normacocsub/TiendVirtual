@@ -21,28 +21,13 @@ namespace Entity
         public decimal IVA { get; set; }
         public decimal ValorDescontado { get; set; }
         public decimal ValorUnitario { get; set; }
-        public decimal ValorTotal { get; set; }
 
         public Producto()
         {
             
         }
 
-        public decimal CalcularDescuento()
-        {
-            return ValorDescontado = ( ValorUnitario * ( Descuento / 100 ));
-        }
 
-        public decimal CalcularIVA()
-        {
-            return IVA = ( ValorUnitario * 0.19m );
-        }
-
-        public decimal CalcularTotal()
-        {
-            CalcularDescuento();
-            CalcularIVA();
-            return ValorTotal = ( IVA + (ValorUnitario - ValorDescontado ));
-        }
+        
     }
 }

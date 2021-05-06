@@ -15,6 +15,7 @@ namespace Entity
         public decimal Descuento { get; set; }
         public int Cantidad { get; set; }
         public string Estado { get; set; }
+        public string EstadoTransaccion { get; set; }
         public decimal Total { get; set; }
         [NotMapped]
         public Detalle Detalle { get; set; }
@@ -25,6 +26,8 @@ namespace Entity
         [NotMapped]
         public Usuario Usuario { get; set; }
         public string UsuarioVentasId { get; set; }
+        public decimal SubTotal { get; set; }
+        public decimal ValorSinDescuento { get; set; }
 
         public Factura()
         {
@@ -39,17 +42,18 @@ namespace Entity
                 Fecha = DateTime.Now,
                 IVA = detalle.Producto.IVA,
                 Producto = detalle.Producto,
-                ValorTotal = detalle.Producto.ValorTotal,
+                ValorTotal = detalle.ValorTotal,
                 ValorUnitario = detalle.Producto.ValorUnitario,
                 ProductoId = detalle.Producto.Codigo,
-                Cantidad = detalle.Cantidad
+                Cantidad = detalle.Cantidad,
             };
+            Detalle.CalcularTotal();
             Detalles.Add(Detalle);
         }
 
         public decimal CalcularTotalDescuento()
         {
-            return Descuento = Detalles.Sum(f => f.Descuento * f.Cantidad);
+            return Descuento = Detalles.Sum(f => f.ValorDescuento * f.Cantidad);
         }
 
         public decimal CalcularTotalIVA()
@@ -57,9 +61,19 @@ namespace Entity
             return IVA = Detalles.Sum(f => f.IVA * f.Cantidad);
         }
 
+        public decimal CalcularSubTotal()
+        {
+            return SubTotal = Detalles.Sum( d => d.ValorUnitario * d.Cantidad);
+        }
+
+        public decimal CalcularValorSinDescuento()
+        {
+            return ValorSinDescuento = Detalles.Sum( d => (d.IVA + d.ValorUnitario) * d.Cantidad );
+        }
+
         public decimal CalcularCantidad()
         {
-            return Cantidad = Detalles.Count;
+            return Cantidad = Detalles.Sum(d => d.Cantidad);
         }
 
         public decimal CalcularTotal()

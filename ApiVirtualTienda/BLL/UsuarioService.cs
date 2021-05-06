@@ -101,6 +101,24 @@ namespace BLL
             }
         }
 
+        public ActualizarUsuarioResponse ActualizarEstado(string user, string estado)
+        {
+            try
+            {
+                var response = _context.Usuarios.Find(user);
+                if(response != null)
+                {
+                    response.Estado = estado;
+                    return new ActualizarUsuarioResponse(response);
+                }
+                return new ActualizarUsuarioResponse("No existe este usuario", "NoExiste");
+            }
+            catch(Exception e)
+            {
+                return new ActualizarUsuarioResponse($"Error en la aplicacion: {e.Message}", "Error");
+            }
+        }
+
         public class ConsultarInteresadosResponse
         {
             public ConsultarInteresadosResponse(List<UsuarioInteresado> interesados)

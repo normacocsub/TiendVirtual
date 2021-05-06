@@ -1,3 +1,5 @@
+using Entity;
+
 namespace TiendaWebApi.Models
 {
     public class UsuarioInputModel
@@ -8,11 +10,23 @@ namespace TiendaWebApi.Models
         public string Apellidos { get; set; }
         public string Sexo { get; set; }
         public string Telefono { get; set; }
+        public string Estado { get; set; }
         public string Role { get; set; }
     }
 
     public class UsuarioViewModel : UsuarioInputModel
     {
-
+        public UsuarioViewModel(){}
+        public UsuarioViewModel(Usuario usuario)
+        {
+            Email = usuario.Email;
+            Password = "";
+            Nombres = usuario.Nombres;
+            Apellidos = usuario.Apellidos;
+            Sexo = usuario.Sexo;
+            Telefono = usuario.Telefono;
+            Estado = usuario.Estado;
+            Role = usuario.Role;
+        }
     }
 }

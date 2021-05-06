@@ -30,6 +30,7 @@ namespace TiendaWebApi
         {
 
             services.AddControllers();
+            services.AddCors();
             
             //contextos base de datos
             string connectionString = Configuration["ConnectionStrings:DefaultConnection"];
@@ -54,6 +55,16 @@ namespace TiendaWebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            #region global cors policy activate Authentication/Authorization
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+            #endregion
 
             app.UseAuthorization();
 

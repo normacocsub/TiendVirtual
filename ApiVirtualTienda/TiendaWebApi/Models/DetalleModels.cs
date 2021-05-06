@@ -1,4 +1,5 @@
 using System;
+using Entity;
 
 namespace TiendaWebApi.Models
 {
@@ -16,6 +17,17 @@ namespace TiendaWebApi.Models
 
     public class DetalleViewModel : DetalleInputModels
     {
-
+        public DetalleViewModel(){}
+        public DetalleViewModel(Detalle detalle)
+        {
+            Codigo = detalle.Codigo;
+            Fecha = detalle.Fecha;
+            Descuento = detalle.Descuento;
+            IVA = detalle.IVA;
+            ValorTotal = detalle.ValorTotal;
+            ValorUnitario = detalle.ValorUnitario;
+            Cantidad = detalle.Cantidad;
+            CodigoProducto = detalle.ProductoId;
+        }
     }
 }

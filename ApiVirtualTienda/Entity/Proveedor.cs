@@ -11,6 +11,7 @@ namespace Entity
         public string Nombre { get; set; }
         [NotMapped]
         public Producto Producto { get; set; }
+        public string Telefono { get; set; }
         //public List<Producto> Productos { get; set; }
 
         public Proveedor()

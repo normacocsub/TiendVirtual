@@ -50,7 +50,7 @@ namespace TiendaWeb.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(response.Usuario);
+            return Ok(new UsuarioViewModel(response.Usuario));
         }
 
         [HttpPost("Interesado")]
@@ -73,7 +73,7 @@ namespace TiendaWeb.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(response.Interesado);
+            return Ok(new InteresadoViewModel(response.Interesado));
         }
 
         [HttpPut("ActualizarInfo")]
@@ -96,7 +96,7 @@ namespace TiendaWeb.Controllers
                 }
                 return BadRequest(detallesproblemas);
             }
-            return Ok(response.Usuario);
+            return Ok(new UsuarioViewModel(response.Usuario));
         }
 
         [HttpGet("Interesados")]
@@ -116,6 +116,28 @@ namespace TiendaWeb.Controllers
             }
             return Ok(response.Interesados.Select(i => new InteresadoViewModel(i)));
         }
+
+        [HttpPut("UsuarioEstado/{user}/{estado}")]
+        public ActionResult<UsuarioViewModel> ActualizarEstadoUsuario(string user, string estado)
+        {
+            var response = _serviceUsuario.ActualizarEstado(user, estado);
+            if(response.Error)
+            {
+                ModelState.AddModelError("Error al actualizar el usuario", response.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(response.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                if(response.Estado == "NoExiste")
+                {
+                    detallesproblemas.Status = StatusCodes.Status404NotFound;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(new UsuarioViewModel(response.Usuario));
+        }
         private Usuario MapearUsuario(UsuarioInputModel usuarioInput)
         {
             var usuario = new Usuario
@@ -126,7 +148,8 @@ namespace TiendaWeb.Controllers
                 Apellidos = usuarioInput.Apellidos,
                 Nombres = usuarioInput.Nombres,
                 Sexo = usuarioInput.Sexo,
-                Telefono = usuarioInput.Sexo
+                Telefono = usuarioInput.Sexo,
+                Estado = "Activo"
             };
             return usuario;
         }
@@ -143,7 +166,8 @@ namespace TiendaWeb.Controllers
                     Apellidos = interesadoInput.Usuario.Apellidos,
                     Nombres = interesadoInput.Usuario.Nombres,
                     Sexo = interesadoInput.Usuario.Sexo,
-                    Telefono = interesadoInput.Usuario.Sexo
+                    Telefono = interesadoInput.Usuario.Sexo,
+                    Estado = "Activo"
                 }
             };
             return interesado;
