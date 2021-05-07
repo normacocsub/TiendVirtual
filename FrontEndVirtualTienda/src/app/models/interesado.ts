@@ -1,7 +1,7 @@
 import { Usuario } from "./usuario";
 
 export class Interesado {
-    nit: string;
+    nit: string | undefined;
     usuario: Usuario;
 
     constructor(){

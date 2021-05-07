@@ -150,6 +150,18 @@ namespace BLL
             }
         }
 
+        public Usuario ValidarUsuario(string nombreUsuario, string contrasena)
+        {
+            try
+            {
+                return _context.Usuarios.Where(u => u.Email.ToLower() == nombreUsuario.ToLower() && u.Password == contrasena && (u.Estado == "Activo")).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
 
         public class BuscarUsuarioResponse
         {

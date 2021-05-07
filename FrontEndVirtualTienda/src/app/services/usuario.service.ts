@@ -41,4 +41,8 @@ export class UsuarioService {
   actulizarEstadoUsuario(email: string, estado: string){
     return this.http.put<Usuario>(this.ruta + `api/Usuario/UsuarioEstado/${email}/${estado}`, httpOptions);
   }
+
+  consultarInteresados(){
+    return this.http.get<Interesado[]>(this.ruta + "api/Usuario/Interesados");
+  }
 }

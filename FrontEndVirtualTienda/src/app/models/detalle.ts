@@ -40,7 +40,7 @@ export class Detalle {
             {
                 return this.valorTotal = 0;
             }
-            return this.valorTotal = ( this.iva + (this.valorUnitario - this.valorDescuento )) * this.cantidad;
+            return this.valorTotal = ( this.iva + (this.valorUnitario - this.valorDescuento ));
         }
 
 

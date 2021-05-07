@@ -23,7 +23,7 @@ namespace TiendaWeb.Controllers
 
             if(usuarioResponse == null)
             {
-                _context.Usuarios.Add(new Usuario(){Email = "lider@gmail.com", Password = "adminABC", Role = "LIDER"});
+                _context.Usuarios.Add(new Usuario(){Email = "lider@gmail.com",Estado = 'Activo', Password = "adminABC", Role = "LIDER"});
                 _context.SaveChanges();
             }
 
@@ -177,6 +177,21 @@ namespace TiendaWeb.Controllers
                 return BadRequest(detallesproblemas);
             }
             return Ok(new UsuarioViewModel(response.Usuario));
+        }
+        [HttpGet("login/{user}/{password}")]
+        public ActionResult<UsuarioViewModel> VerificarLogin(string user, string password)
+        {
+            var response = _serviceUsuario.ValidarUsuario(user, password);
+            if (response == null)
+            {
+                ModelState.AddModelError("Acceso Denegado", "Usuario y/o contraseña incorrectos");
+                var problemDetails = new ValidationProblemDetails(ModelState)
+                {
+                    Status = StatusCodes.Status401Unauthorized,
+                };
+                return Unauthorized(problemDetails);
+            }
+            return Ok(new UsuarioViewModel(response));
         }
 
         private Usuario MapearInfoUsuario(UsuarioInputModel usuarioInput)

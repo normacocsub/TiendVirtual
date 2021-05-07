@@ -27,9 +27,12 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {CardModule} from 'primeng/card';
 import {SplitterModule} from 'primeng/splitter';
 import {PickListModule} from 'primeng/picklist';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {SlideMenuModule} from 'primeng/slidemenu';
 
 import {MessageService} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
+
 
 import { RegistroProductoComponent } from './Pages/registro-producto/registro-producto.component';
 import { RegistroUsuarioComponent } from './Pages/registro-usuario/registro-usuario.component';
@@ -39,6 +42,9 @@ import { ConsultarProductosComponent } from './Pages/consultar-productos/consult
 import { VerProductoComponent } from './Pages/ver-producto/ver-producto.component';
 import { RealizarFacturaComponent } from './Pages/realizar-factura/realizar-factura.component';
 import { DetallesProductoCompraComponent } from './Pages/detalles-producto-compra/detalles-producto-compra.component';
+import { ConsultarFacturasComponent } from './Pages/consultar-facturas/consultar-facturas.component';
+import { LoginComponent } from './Pages/login/login.component';
+
 
 
 
@@ -56,7 +62,9 @@ import { DetallesProductoCompraComponent } from './Pages/detalles-producto-compr
     ConsultarProductosComponent,
     VerProductoComponent,
     RealizarFacturaComponent,
-    DetallesProductoCompraComponent
+    DetallesProductoCompraComponent,
+    ConsultarFacturasComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,11 +91,13 @@ import { DetallesProductoCompraComponent } from './Pages/detalles-producto-compr
     DynamicDialogModule,
     CardModule,
     SplitterModule,
-    PickListModule
+    PickListModule,
+    InputSwitchModule,
+    SlideMenuModule
   ],
   providers: [
     MessageService,
-    DialogService
+    DialogService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

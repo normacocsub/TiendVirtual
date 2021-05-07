@@ -43,7 +43,7 @@ namespace Entity
             {
                 return ValorTotal = 0;
             }
-            return ValorTotal = ( IVA + (ValorUnitario - ValorDescuento )) * Cantidad;
+            return ValorTotal = ( IVA + (ValorUnitario - ValorDescuento ));
         }
     }
 }

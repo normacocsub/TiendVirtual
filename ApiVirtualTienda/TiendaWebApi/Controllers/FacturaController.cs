@@ -87,7 +87,18 @@ namespace TiendaWebApi.Controllers
                 var detalle = new Detalle
                 {
                     Cantidad = d.Cantidad,
-                    Producto = _serviceProducto.BuscarProducto(d.CodigoProducto).Producto,
+                    Producto = new Producto{
+                        Cantidad = d.Producto.Cantidad,
+                        Codigo = d.Producto.Codigo,
+                        Descripcion = d.Producto.Descripcion,
+                        Descuento = d.Producto.Descuento,
+                        Estado = d.Producto.Estado,
+                        Fecha = d.Producto.Fecha,
+                        IVA = d.Producto.IVA,   
+                        ProveedorNIT = d.Producto.IdProveedor,
+                        ValorDescontado = d.Producto.ValorDescontado,
+                        ValorUnitario = d.Producto.ValorUnitario
+                    },
                 };
                 factura.AgregarDetalle(detalle);
             });
