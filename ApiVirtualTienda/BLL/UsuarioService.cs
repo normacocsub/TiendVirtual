@@ -119,6 +119,76 @@ namespace BLL
             }
         }
 
+        public ConsultarUsuariosResponse ConsultarUsuarios()
+        {
+            try
+            {
+                var usuarios = _context.Usuarios.ToList();
+                var result = usuarios.Where(u => u.Role != "LIDER").ToList();
+                return new ConsultarUsuariosResponse(result);
+            }
+            catch(Exception e)
+            {
+                return new ConsultarUsuariosResponse($"Error en la aplicacion: {e.Message}", "Error");
+            }
+        }
+
+        public BuscarUsuarioResponse BuscarUsuario(string email)
+        {
+            try
+            {
+                var response = _context.Usuarios.Find(email);
+                if(response != null)
+                {
+                    return new BuscarUsuarioResponse(response);
+                }
+                return new BuscarUsuarioResponse("No existe el usuario", "NoExiste");
+            }
+            catch(Exception e)
+            {
+                return new BuscarUsuarioResponse($"Error en la aplicacion: {e.Message}", "Error");
+            }
+        }
+
+
+        public class BuscarUsuarioResponse
+        {
+            public BuscarUsuarioResponse(Usuario usuario)
+            {
+                Error = false;
+                Usuario = usuario;
+            }
+            public BuscarUsuarioResponse(string mensaje, string estado)
+            {
+                Error = true;
+                Mensaje = mensaje;
+                Estado = estado;
+            }
+            public bool Error { get; set; }
+            public string Estado { get; set; }
+            public string Mensaje { get; set; }
+            public Usuario Usuario { get; set; }
+        }
+
+        public class ConsultarUsuariosResponse
+        {
+            public ConsultarUsuariosResponse(List<Usuario> usuarios)
+            {
+                Error = false;
+                Usuarios = usuarios;
+            }
+            public ConsultarUsuariosResponse(string mensaje, string estado)
+            {
+                Error = true;
+                Mensaje = mensaje;
+                Estado = estado;
+            }
+            public bool Error { get; set; }
+            public string Estado { get; set; }
+            public string Mensaje { get; set; }
+            public List<Usuario> Usuarios { get; set; }
+        }
+
         public class ConsultarInteresadosResponse
         {
             public ConsultarInteresadosResponse(List<UsuarioInteresado> interesados)

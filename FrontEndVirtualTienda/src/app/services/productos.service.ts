@@ -10,12 +10,12 @@ const ruta: string = environment.ruta;
 })
 export class ProductosService {
   ruta: string = '';
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.ruta = ruta;
   }
 
   consultarProductos(){
-    return this.http.get(this.ruta+"api/Producto");
+    return this.http.get<Producto[]>(this.ruta+"api/Producto");
   }
 
   guardarProducto(producto: Producto){

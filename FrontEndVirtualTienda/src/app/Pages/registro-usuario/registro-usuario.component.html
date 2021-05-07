@@ -1,0 +1,129 @@
+<p-toast></p-toast>
+<p-tabView>
+    <p-tabPanel header="Registro Usuario Ventas">
+       <div class="card">
+        <p-accordion>
+            <form action="" [formGroup]="formGroupUsuario">
+                <p-accordionTab header="Datos Usuario" [selected]="true">
+                    <div class="p-fluid">
+                        <div class="p-field">
+                            <span class="p-float-label">
+                              <input id="correo-input" formControlName="email"  type="text" pInputText />
+                              <label for="float-input">Correo</label>
+                            </span>
+
+                        </div>
+
+                        <div class="p-field">
+                            <h5>Contraseña</h5>
+                            <p-password formControlName="password"  [toggleMask]="true"></p-password>
+                        </div>
+                    </div>
+                </p-accordionTab>
+                <p-accordionTab header="Datos Personales">
+                    <div class="p-fluid">
+                        <div class="p-field">
+                            <span class="p-float-label">
+                              <input id="nombre-input" formControlName="nombres" type="text" pInputText />
+                              <label for="float-input">Nombre</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field">
+                            <span class="p-float-label">
+                              <input id="apellido-input" formControlName="apellidos" type="text" pInputText />
+                              <label for="float-input">Apellido</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field">
+                            <p-dropdown formControlName="sexo" [options]="sexoUsuario" ></p-dropdown>
+                        </div>
+                        <br>
+                        <div class="p-field">
+                            <span class="p-float-label">
+                              <input id="telefono-input" formControlName="telefono" type="text" pInputText />
+                              <label for="float-input">Telefono</label>
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                </p-accordionTab>
+                <br>
+                <button  pButton type="button" (click)="onSubmitUsuario()" [disabled]="formGroupUsuario?.invalid" class="p-mr-2 p-mb-2" label="Registrar Usuario Venta"></button>
+                <button class="p-mb-2" pButton type="button" label="Cancelar Registro" class="p-button-danger"></button>
+            </form>
+        </p-accordion>
+       </div>
+    </p-tabPanel>
+    <p-tabPanel header="Registro Usuario Interesado">
+        <div class="card">
+            <p-accordion>
+                <form action="" [formGroup]="formGroupInteresado">
+                    <p-accordionTab header="Datos Usuario" [selected]="true">
+                        <div class="p-fluid">
+                            <div class="p-field">
+                                <span class="p-float-label">
+                                  <input id="correoi-input" formControlName="email" type="text" pInputText />
+                                  <label for="float-input">Correo</label>
+                                </span>
+
+                            </div>
+
+                            <div class="p-field">
+                                <h5>Contraseña</h5>
+                                <p-password formControlName="password" [toggleMask]="true"></p-password>
+                            </div>
+                        </div>
+                    </p-accordionTab>
+                    <p-accordionTab header="Datos Personales">
+                        <div class="p-fluid">
+                            <br>
+                            <div class="p-field">
+                                <span class="p-float-label">
+                                  <input id="nit-input" formControlName="nit" type="text" pInputText />
+                                  <label for="float-input">NIT</label>
+                                </span>
+                            </div>
+                            <br>
+                            <div class="p-field">
+                                <span class="p-float-label">
+                                  <input id="nombrei-input" formControlName="nombres" type="text" pInputText />
+                                  <label for="float-input">Nombre</label>
+                                </span>
+                            </div>
+                            <br>
+                            <div class="p-field">
+                                <span class="p-float-label">
+                                  <input id="apellidoi-input" formControlName="apellidos" type="text" pInputText />
+                                  <label for="float-input">Apellido</label>
+                                </span>
+                            </div>
+                            <br>
+                            <div class="p-field">
+                                <p-dropdown formControlName="sexo" [options]="sexoUsuario" ></p-dropdown>
+                            </div>
+                            <br>
+                            <div class="p-field">
+                                <span class="p-float-label">
+                                  <input id="telefonoi-input" formControlName="telefono" type="text" pInputText />
+                                  <label for="float-input">Telefono</label>
+                                </span>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </p-accordionTab>
+                    <br>
+                    <button  pButton type="button" (click)="onSubmitInteresado()" [disabled]="formGroupInteresado?.invalid"  class="p-mr-2 p-mb-2" label="Registrar Usuario Interesado"></button>
+                    <button class="p-mb-2" pButton type="button" label="Cancelar Registro" class="p-button-danger"></button>
+                </form>
+            </p-accordion>
+        </div>
+    </p-tabPanel>
+</p-tabView>

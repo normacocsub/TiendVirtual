@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+<div class="card">
+  <br>
+  <p-panel header="Actualizar Usuario">
+    <form action="">
+      <div class="p-fluid">
+        <br>
+        <div class="p-field">
+            <span class="p-float-label">
+              <input id="nombre-input" [(ngModel)]="usuario.nombres" name="nombres" type="text" pInputText />
+              <label for="float-input">Nombre</label>
+            </span>
+        </div>
+        <br>
+        <br>
+        <div class="p-field">
+            <span class="p-float-label">
+              <input id="apellido-input" [(ngModel)]="usuario.apellidos" name="apellido" type="text" pInputText />
+              <label for="float-input">Apellido</label>
+            </span>
+        </div>
+        <br>
+
+        <br>
+        <div class="p-field">
+            <span class="p-float-label">
+              <input id="telefono-input" [(ngModel)]="usuario.telefono" name="telefono"  type="text" pInputText />
+              <label for="float-input">Telefono</label>
+            </span>
+        </div>
+
+      </div>
+      <br>
+      <br>
+        <div>
+          <button  pButton type="button" (click)="actualizar()"  class="p-mr-2 p-mb-2" label="Actualizar Usuario"></button>
+          <button class="p-mb-2" pButton type="button" label="Cancelar" class="p-button-danger"></button>
+        </div>
+    </form>
+  </p-panel>
+</div>

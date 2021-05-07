@@ -79,7 +79,7 @@ namespace TiendaWeb.Controllers
         [HttpPut("ActualizarInfo")]
         public ActionResult<UsuarioViewModel> ActualizarInformacionUsuario(UsuarioInputModel usuarioInput)
         {
-            Usuario usuario = MapearUsuario(usuarioInput);
+            Usuario usuario = MapearInfoUsuario(usuarioInput);
             var response = _serviceUsuario.ActualizarDatos(usuario);
             if(response.Error)
             {
@@ -99,6 +99,28 @@ namespace TiendaWeb.Controllers
             return Ok(new UsuarioViewModel(response.Usuario));
         }
 
+        [HttpGet("{email}")]
+        public ActionResult<UsuarioViewModel> BuscarUsuario(string email)
+        {
+            var response = _serviceUsuario.BuscarUsuario(email);
+            if(response.Error)
+            {
+                ModelState.AddModelError("Error al buscar el usuario", response.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(response.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                if(response.Estado == "NoExiste")
+                {
+                    detallesproblemas.Status = StatusCodes.Status404NotFound;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(response.Usuario);
+        }
+
         [HttpGet("Interesados")]
         public ActionResult<InteresadoViewModel> ConsultarInteresados()
         {
@@ -115,6 +137,24 @@ namespace TiendaWeb.Controllers
                 return BadRequest(detallesproblemas);
             }
             return Ok(response.Interesados.Select(i => new InteresadoViewModel(i)));
+        }
+
+        [HttpGet]
+        public ActionResult<UsuarioViewModel> ConsultarUsuarios()
+        {
+            var response = _serviceUsuario.ConsultarUsuarios();
+            if(response.Error)
+            {
+                ModelState.AddModelError("Error al consultar los usuarios", response.Mensaje);
+                var detallesproblemas = new ValidationProblemDetails(ModelState);
+
+                if(response.Estado == "Error")
+                {
+                    detallesproblemas.Status = StatusCodes.Status500InternalServerError;
+                }
+                return BadRequest(detallesproblemas);
+            }
+            return Ok(response.Usuarios.Select(u => new UsuarioViewModel(u)));
         }
 
         [HttpPut("UsuarioEstado/{user}/{estado}")]
@@ -138,6 +178,22 @@ namespace TiendaWeb.Controllers
             }
             return Ok(new UsuarioViewModel(response.Usuario));
         }
+
+        private Usuario MapearInfoUsuario(UsuarioInputModel usuarioInput)
+        {
+            var usuario = new Usuario
+            {
+                Email = usuarioInput.Email,
+                Password = usuarioInput.Password,
+                Role = usuarioInput.Role,
+                Apellidos = usuarioInput.Apellidos,
+                Nombres = usuarioInput.Nombres,
+                Sexo = usuarioInput.Sexo,
+                Telefono = usuarioInput.Telefono,
+                Estado = usuarioInput.Estado
+            };
+            return usuario;
+        }
         private Usuario MapearUsuario(UsuarioInputModel usuarioInput)
         {
             var usuario = new Usuario
@@ -148,7 +204,7 @@ namespace TiendaWeb.Controllers
                 Apellidos = usuarioInput.Apellidos,
                 Nombres = usuarioInput.Nombres,
                 Sexo = usuarioInput.Sexo,
-                Telefono = usuarioInput.Sexo,
+                Telefono = usuarioInput.Telefono,
                 Estado = "Activo"
             };
             return usuario;
@@ -166,7 +222,7 @@ namespace TiendaWeb.Controllers
                     Apellidos = interesadoInput.Usuario.Apellidos,
                     Nombres = interesadoInput.Usuario.Nombres,
                     Sexo = interesadoInput.Usuario.Sexo,
-                    Telefono = interesadoInput.Usuario.Sexo,
+                    Telefono = interesadoInput.Usuario.Telefono,
                     Estado = "Activo"
                 }
             };

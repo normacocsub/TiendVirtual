@@ -1,6 +1,7 @@
 import { Proveedor } from "./proveedor";
 
 export class Producto {
+    codigo: string | undefined;
     descripcion: string;
     cantidad: number;
     fecha: Date;
@@ -11,8 +12,10 @@ export class Producto {
     proveedor: Proveedor;
     idProveedor: string;
     valorUnitario: number;
+    cantidadSeleccionada: number = 0;
 
     constructor(){
+        this.codigo = undefined;
         this.descripcion = '';
         this.cantidad = 0;
         this.fecha = new Date();

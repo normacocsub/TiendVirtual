@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="p-fluid">
+    <div class="p-field">
+        <label for=""><h5>Descripcion</h5></label>
+        <label for="">{{producto.descripcion}}</label>
+    </div>
+    <div class="p-field">
+        <label for=""><h5>Cantidad</h5></label>
+        <label for="">{{producto.cantidad | number}}</label>
+    </div>
+    <div class="p-field">
+        <label for=""><h5>Valor Total</h5></label>
+        <label for="">{{ producto.valorUnitario | currency:'COP'}}</label>
+    </div>
+    <div>
+      <div class="p-field">
+        <label for=""><h5>Fecha compra</h5></label>
+        <label for="">{{producto.fecha | date}}</label>
+      </div>
+    </div>
+  </div>
+</div>

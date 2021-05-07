@@ -1,0 +1,73 @@
+
+
+<p-tabView>
+  <p-tabPanel header="Seleccionar Productos">
+    <div class="p-col-5 p-d-flex p-ai-center p-jc-center">
+      <p-pickList
+        [source]="sourceProducts"
+        (onMoveToTarget)="evento($event)"
+        (onMoveToSource)="eventoRegreso($event)"
+        [target]="targetProducts"
+        sourceHeader="Available"
+        targetHeader="Selected"
+        [dragdrop]="true"
+        [responsive]="true"
+        [sourceStyle]="{ height: '30rem' }"
+        [targetStyle]="{ height: '30rem' }"
+        filterBy="descripcion"
+        sourceFilterPlaceholder="Search by name"
+        targetFilterPlaceholder="Search by name"
+      >
+        <ng-template let-product pTemplate="item">
+          <div class="product-list-detail">
+            <div class="p-grid p-fluid">
+              <div class="p-col-12 p-md-4">
+                <div class="p-inputgroup">
+                  <h5>{{ product.descripcion }}</h5>
+                  <div *ngIf="product.cantidadSeleccionada > 0">
+                    <h5>-- Cantidad: {{ product.cantidadSeleccionada }}</h5>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="product.cantidadSeleccionada == 0">
+                <div class="p-field">
+                  <span class="p-float-label">
+                    <input  [(ngModel)]="cantidad" type="text" pInputText />
+                    <label for="float-input">Cantidad a comprar</label>
+                  </span>
+                </div>
+                <br>
+                <div class="p-field">
+                  <span class="p-float-label">
+                    <input  [(ngModel)]="valor" type="text" pInputText />
+                    <label for="float-input">Valor Unitario</label>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h5>Cantidad Disponible: {{ product.cantidad }}</h5>
+              <h5>Valor Unitario: {{ product.valorUnitario }}</h5>
+            </div>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Realizar Facturacion">
+    <p-accordion>
+      <p-accordionTab header="Datos Cliente">
+         Content 1
+      </p-accordionTab>
+
+      <p-accordionTab header="Datos Factura">
+        <br>
+        <label for=""><h5>Detalles: </h5></label>
+        <button pButton type="button" (click)="registrarDetalles()" label="Agregar Detalles" ></button>
+      </p-accordionTab>
+  </p-accordion>
+  </p-tabPanel>
+
+</p-tabView>
+
+

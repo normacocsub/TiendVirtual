@@ -3,7 +3,7 @@
     <h5>Registro Producto</h5>
     <p-accordion>
       <p-accordionTab header="Producto" [selected]="true">
-        
+
         <div class="p-fluid">
           <div class="p-field">
             <span class="p-float-label">
@@ -31,8 +31,6 @@
               <p-calendar formControlName="fecha"></p-calendar>
             </div>
           </div>
-
-          
         </div>
       </p-accordionTab>
 
@@ -50,7 +48,7 @@
                 <p-slider formControlName="descuento" (onChange)="handleChange($event)" name="val2"></p-slider>
               </div>
               <br />
-    
+
               <div class="p-field">
                 <span class="p-float-label">
                   <input id="float-input" formControlName="valorDescontado" type="number" pInputText />
@@ -82,9 +80,9 @@
                     <button type="text" pButton label="Seleccionar Proveedor" (click)="op.toggle($event)"></button>
                     <h5>Nombre: {{selectedProveedor.nombre}}</h5>
                     <p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '450px'}">
-                    
+
                         <ng-template pTemplate>
-                            
+
                             <p-table [value]="proveedores" selectionMode="single" [(selection)]="selectedProveedor" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5">
                                 <ng-template pTemplate="header">
                                     <tr>
@@ -106,10 +104,10 @@
                  </p-tabPanel>
 
 
-                
+
                     <p-tabPanel header="Registrar Proveedor">
                         <p-toast></p-toast>
-    
+
                         <form action=""  [formGroup]="formGroupProveedor">
                         <div *ngIf="proveedorRegistrado==false">
                             <div class="p-fluid">
@@ -134,16 +132,16 @@
                                       <label for="float-input">Telefono {{proveedor?.telefono}}</label>
                                     </span>
                                 </div>
-        
-        
+
+
                             </div>
                         </div>
-                        <div class="product-item" *ngIf="proveedorRegistrado"> 
+                        <div class="product-item" *ngIf="proveedorRegistrado">
                             <br>
                             <div class="product-list-detail">
                                 <i class="pi pi-user" style="font-size: 1rem"></i>
                                 <h5 class="p-mb-2">NIT: {{proveedor?.nit}}</h5>
-                               
+
                                 <span class="product-category">Nombre: {{proveedor?.nombre}}</span>
                             </div>
                             <div class="product-list-action">
@@ -159,12 +157,12 @@
                         </div>
                     </form>
                      </p-tabPanel>
-                
-                 
+
+
             </p-tabView>
-            
-            
-            
+
+
+
         </p-accordionTab>
     </p-accordion>
     <br>
