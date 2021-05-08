@@ -28,6 +28,7 @@ namespace Entity
         public string UsuarioVentasId { get; set; }
         public decimal SubTotal { get; set; }
         public decimal ValorSinDescuento { get; set; }
+        public DateTime Fecha { get; set; }
 
         public Factura()
         {
@@ -78,6 +79,8 @@ namespace Entity
 
         public decimal CalcularTotal()
         {
+            CalcularValorSinDescuento();
+            CalcularSubTotal();
             CalcularTotalDescuento();
             CalcularTotalIVA();
             CalcularCantidad();

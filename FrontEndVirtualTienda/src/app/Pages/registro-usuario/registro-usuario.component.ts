@@ -5,6 +5,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 
 import { Interesado } from 'src/app/models/interesado';
@@ -14,16 +15,20 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
   selector: 'app-registro-usuario',
   templateUrl: './registro-usuario.component.html',
-  styleUrls: ['./registro-usuario.component.css']
+  styleUrls: ['./registro-usuario.component.css'],
 })
 export class RegistroUsuarioComponent implements OnInit {
-
-  sexoUsuario = ['Seleccionar Sexo','Masculino', 'Femenino'];
+  sexoUsuario = ['Seleccionar Sexo', 'Masculino', 'Femenino'];
   usuario: Usuario = new Usuario();
   interesado: Interesado = new Interesado();
   formGroupUsuario: FormGroup;
   formGroupInteresado: FormGroup;
-  constructor(private formBuilder: FormBuilder, private messageService: MessageService, private usuarioService: UsuarioService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private messageService: MessageService,
+    private usuarioService: UsuarioService,
+    private router: Router,
+  ) {
     this.formGroupUsuario = this.formBuilder.group({});
     this.formGroupInteresado = this.formBuilder.group({});
   }
@@ -33,7 +38,7 @@ export class RegistroUsuarioComponent implements OnInit {
     this.buildFormInteresado();
   }
 
-  buildFormUsuario(){
+  buildFormUsuario() {
     this.usuario = new Usuario();
     this.usuario.email = '';
     this.usuario.password = '';
@@ -48,11 +53,11 @@ export class RegistroUsuarioComponent implements OnInit {
       nombres: [this.usuario.nombres, [Validators.required]],
       apellidos: [this.usuario.apellidos, [Validators.required]],
       sexo: [this.usuario.sexo, [Validators.required]],
-      telefono: [this.usuario.telefono, [Validators.required]]
+      telefono: [this.usuario.telefono, [Validators.required]],
     });
   }
 
-  buildFormInteresado(){
+  buildFormInteresado() {
     this.interesado = new Interesado();
     this.interesado.nit = '';
     this.interesado.usuario = new Usuario();
@@ -70,9 +75,8 @@ export class RegistroUsuarioComponent implements OnInit {
       apellidos: [this.usuario.apellidos, [Validators.required]],
       sexo: [this.usuario.sexo, [Validators.required]],
       telefono: [this.usuario.telefono, [Validators.required]],
-      nit: [this.interesado.nit, [Validators.required]]
+      nit: [this.interesado.nit, [Validators.required]],
     });
-
   }
 
   get controlUsuario() {
@@ -83,43 +87,46 @@ export class RegistroUsuarioComponent implements OnInit {
     return this.formGroupInteresado?.controls;
   }
 
-  onSubmitUsuario(){
-    if(this.formGroupUsuario?.invalid){
+  onSubmitUsuario() {
+    if (this.formGroupUsuario?.invalid) {
       return;
     }
     this.guardarUsuario();
   }
 
-  onSubmitInteresado(){
-    if(this.formGroupInteresado?.invalid){
+  onSubmitInteresado() {
+    if (this.formGroupInteresado?.invalid) {
       return;
     }
     this.guardarInteresado();
   }
 
-  guardarUsuario(){
+  guardarUsuario() {
     this.usuario = this.formGroupUsuario?.value;
 
-    this.usuarioService.registrarUsuario(this.usuario).subscribe(result => {
-      if(result != null){
-        this.crearMensajeSucessToast("Usuario Registrado");
+    this.usuarioService.registrarUsuario(this.usuario).subscribe((result) => {
+      if (result != null) {
+        this.crearMensajeSucessToast('Usuario Registrado');
+        this.router.navigate(['/consultarUsuarios']);
       }
-    })
+    });
   }
 
-  guardarInteresado(){
+  guardarInteresado() {
     this.usuario = this.formGroupInteresado?.value;
     this.interesado.nit = this.formGroupInteresado?.value.nit;
     this.interesado.usuario = this.usuario;
-    this.usuarioService.registrarUsuarioInteresado(this.interesado).subscribe(result => {
-      if(result != null){
-        this.crearMensajeSucessToast("Usuario interesado Registrado");
-      }
-    })
+    this.usuarioService
+      .registrarUsuarioInteresado(this.interesado)
+      .subscribe((result) => {
+        if (result != null) {
+          this.crearMensajeSucessToast('Usuario interesado Registrado');
+          this.router.navigate(['/consultarUsuarios']);
+        }
+      });
   }
 
   crearMensajeSucessToast(mensaje: string) {
     this.messageService.add({ severity: 'success', summary: mensaje });
   }
-
 }

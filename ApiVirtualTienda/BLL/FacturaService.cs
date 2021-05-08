@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DAL;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -29,6 +30,7 @@ namespace BLL
                 if(response == null)
                 {
                     factura.EstadoTransaccion = "Venta";
+                    factura.Fecha = DateTime.Now;
                     _context.Facturas.Add(factura);
                     bool estadoTransaction = false;
                     foreach (var item in factura.Detalles)
@@ -67,7 +69,7 @@ namespace BLL
                 detalle.Producto.Codigo = (_context.Productos.ToList().Count + 1).ToString();
                 _context.Productos.Add(detalle.Producto);
                 detalle.Cantidad = detalle.Producto.Cantidad;
-                
+                factura.Fecha = DateTime.Now;
                 factura.AgregarDetalle(detalle);
                 factura.Descuento = descuento;
                 factura.CalcularCantidad();
@@ -110,7 +112,11 @@ namespace BLL
         {
             try
             {
-                var facturas = _context.Facturas.OrderBy(f => f.Estado).ToList();
+                var facturas = _context.Facturas.Include(d => d.Detalles).OrderBy(f => f.Estado).ToList();
+                foreach (var item in facturas)
+                {
+                    item.Detalles.ForEach(d => d.Producto = _context.Productos.Find(d.ProductoId));
+                }
                 return new ConsultarFacturasResponse(facturas);
             }
             catch(Exception e)

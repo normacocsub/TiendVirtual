@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(TiendaVirtualContext))]
-    [Migration("20210506060709_InitialCreate")]
+    [Migration("20210508034504_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,6 +81,9 @@ namespace DAL.Migrations
 
                     b.Property<string>("EstadoTransaccion")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("IVA")
                         .HasColumnType("decimal(18,2)");

@@ -97,7 +97,8 @@ namespace DAL.Migrations
                     InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UsuarioVentasId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorSinDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    ValorSinDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

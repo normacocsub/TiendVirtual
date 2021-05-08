@@ -9,6 +9,7 @@ export class Factura {
     estado: string
     estadoTransaccion: string;
     total: number;
+    fecha: Date;
     interesadoId: string | undefined;
     usuarioVentasId: string | undefined;
     detalles: Detalle[];
@@ -22,6 +23,7 @@ export class Factura {
       this.interesadoId = '';
       this.usuarioVentasId = '';
       this.total = 0;
+      this.fecha = new Date();
       this.detalles = [];
       this.descuento = 0;
       this.iva = 0;

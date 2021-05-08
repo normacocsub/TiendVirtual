@@ -23,7 +23,7 @@ namespace TiendaWeb.Controllers
 
             if(usuarioResponse == null)
             {
-                _context.Usuarios.Add(new Usuario(){Email = "lider@gmail.com",Estado = 'Activo', Password = "adminABC", Role = "LIDER"});
+                _context.Usuarios.Add(new Usuario(){Email = "lider@gmail.com",Estado = "Activo", Password = "adminABC", Role = "LIDER"});
                 _context.SaveChanges();
             }
 

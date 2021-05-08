@@ -5,6 +5,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 import { Producto } from 'src/app/models/producto';
@@ -32,6 +33,7 @@ export class RegistroProductoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private proveedorService: ProveedorService,
     private productoService: ProductosService,
+    private router: Router,
   ) {
     this.formGroup = this.formBuilder.group({});
     this.formGroupProveedor = this.formBuilder.group({});
@@ -140,6 +142,7 @@ export class RegistroProductoComponent implements OnInit {
     }
     this.productoService.guardarProducto(this.producto).subscribe(result => {
       this.crearMensajeSucessToast("Producto Registrado");
+      this.router.navigate(['/consultarProductos']);
     });
     console.log(this.producto);
   }

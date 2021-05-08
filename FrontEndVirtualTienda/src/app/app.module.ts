@@ -44,6 +44,7 @@ import { RealizarFacturaComponent } from './Pages/realizar-factura/realizar-fact
 import { DetallesProductoCompraComponent } from './Pages/detalles-producto-compra/detalles-producto-compra.component';
 import { ConsultarFacturasComponent } from './Pages/consultar-facturas/consultar-facturas.component';
 import { LoginComponent } from './Pages/login/login.component';
+import { VerFacturaComponent } from './Pages/ver-factura/ver-factura.component';
 
 
 
@@ -65,6 +66,7 @@ import { LoginComponent } from './Pages/login/login.component';
     DetallesProductoCompraComponent,
     ConsultarFacturasComponent,
     LoginComponent,
+    VerFacturaComponent,
   ],
   imports: [
     BrowserModule,

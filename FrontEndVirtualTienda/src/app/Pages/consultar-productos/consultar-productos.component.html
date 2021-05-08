@@ -5,9 +5,12 @@
   <br>
   <h5>Consultar Productos</h5>
   <p-toolbar styleClass="p-mb-4">
-    <ng-template pTemplate="left">
-        <button pButton pRipple label="Crear Producto" icon="pi pi-plus" class="p-button-success p-mr-2"></button>
-    </ng-template>
+    <div *ngIf="usuario.role == 'LIDER'">
+      <ng-template pTemplate="left">
+        <button pButton pRipple label="Crear Producto" [routerLink]="['/registroProducto']" icon="pi pi-plus" class="p-button-success p-mr-2"></button>
+      </ng-template>
+    </div>
+
   </p-toolbar>
   <p-table [value]="products">
     <ng-template pTemplate="header">

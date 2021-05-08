@@ -80,6 +80,9 @@ namespace DAL.Migrations
                     b.Property<string>("EstadoTransaccion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("IVA")
                         .HasColumnType("decimal(18,2)");
 

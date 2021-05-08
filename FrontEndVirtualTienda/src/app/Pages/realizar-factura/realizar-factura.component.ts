@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Detalle } from 'src/app/models/detalle';
 import { Factura } from 'src/app/models/factura';
 import { Interesado } from 'src/app/models/interesado';
 import { Producto } from 'src/app/models/producto';
+import { Usuario } from 'src/app/models/usuario';
 import { FacturaService } from 'src/app/services/factura.service';
+import { LoginService } from 'src/app/services/login.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { DetallesProductoCompraComponent } from '../detalles-producto-compra/detalles-producto-compra.component';
@@ -29,12 +32,17 @@ export class RealizarFacturaComponent implements OnInit {
   interesado: Interesado = new Interesado();
   interesados: Interesado[] = [];
   estadoClienteChecked: boolean = true;
+  usuario: Usuario = new Usuario();
   constructor(
     private productoService: ProductosService,
     private usuarioService: UsuarioService,
     private facturaService: FacturaService,
     private router: Router,
-  ) {}
+    private loginService: LoginService,
+    private messageService: MessageService,
+  ) {
+    this.usuario = this.loginService.currentUserValue;
+  }
 
   ngOnInit(): void {
     this.consultarProductos();
@@ -110,25 +118,34 @@ export class RealizarFacturaComponent implements OnInit {
   }
 
   guardarFactura() {
+    this.factura.interesadoId = this.interesado.nit;
     //se asginan undefined las claves para que en el back se autoasignen
     if (!this.estadoClienteChecked) {
       this.interesado.nit = undefined;
       this.factura.interesadoId = undefined;
     }
     if (this.detalles.length == 0) {
-      //mensaje de error
+      this.crearMensajeInfoToast("No se han seleccionado Productos aun");
       return;
     }
-    //actualizar con la verificacion de login
-    this.factura.usuarioVentasId = undefined;
+
+    this.factura.usuarioVentasId = this.usuario.email;
     this.factura.codigo = undefined;
 
     this.facturaService.guardarFactura(this.factura).subscribe(result => {
-      //mensaje de guardado + redireccion a consultar facturas
+      this.crearMensajeSucessToast("Factura Registrada Correctamente")
       this.router.navigate(['/consultarFacturas']);
       console.log(result);
     })
   }
 
   onRowSelect(event: any) {}
+
+  crearMensajeSucessToast(mensaje: string) {
+    this.messageService.add({ severity: 'success', summary: mensaje });
+  }
+
+  crearMensajeInfoToast(mensaje: string) {
+    this.messageService.add({ severity: 'info', summary: mensaje });
+  }
 }

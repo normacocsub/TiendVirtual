@@ -20,13 +20,14 @@ export class AppComponent implements OnInit {
     this.loginService.currentUser.subscribe(result => {
       if(result.email){
         this.logged = true;
-        if(result.role = "Ventas"){
+        console.log(result);
+        if(result.role == "Ventas"){
           this.menuUsuarioVentas();
         }
-        if(result.role = "Interesado"){
+        if(result.role == "Interesado"){
           this.menuUsuarioInteresado();
         }
-        if(result.role = "LIDER"){
+        if(result.role == "LIDER"){
           this.menuAdmin();
         }
       }
@@ -199,6 +200,17 @@ export class AppComponent implements OnInit {
             label: 'Consultar',
             icon: 'pi pi-search',
             routerLink: ['/consultarFacturas'],
+          },
+        ],
+      },
+      {
+        label: 'Productos',
+        icon: 'pi pi-briefcase',
+        items: [
+          {
+            label: 'Consultar',
+            icon: 'pi pi-search',
+            routerLink: ['/consultarProductos'],
           },
         ],
       },

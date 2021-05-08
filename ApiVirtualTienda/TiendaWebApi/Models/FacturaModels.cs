@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Entity;
 
@@ -15,6 +16,7 @@ namespace TiendaWebApi.Models
         public List<DetalleInputModels> Detalles { get; set; }
         public string InteresadoId { get; set; }
         public string UsuarioVentasId { get; set; }
+        public DateTime Fecha { get; set; }
 
         public FacturaInputModels()
         {
@@ -36,6 +38,7 @@ namespace TiendaWebApi.Models
             InteresadoId = factura.InteresadoId;
             UsuarioVentasId = factura.UsuarioVentasId;
             EstadoTransaccion = factura.EstadoTransaccion;
+            Fecha = factura.Fecha;
             factura.Detalles.ForEach(d => {
                 var detalle = new DetalleViewModel(d);
                 Detalles.Add(detalle);

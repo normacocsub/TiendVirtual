@@ -9,6 +9,7 @@ import { LoginComponent } from './Pages/login/login.component';
 import { RealizarFacturaComponent } from './Pages/realizar-factura/realizar-factura.component';
 import { RegistroProductoComponent } from './Pages/registro-producto/registro-producto.component';
 import { RegistroUsuarioComponent } from './Pages/registro-usuario/registro-usuario.component';
+import { VerFacturaComponent } from './Pages/ver-factura/ver-factura.component';
 import { GuardGuard } from './services/guard.guard';
 
 const routes: Routes = [
@@ -34,13 +35,13 @@ const routes: Routes = [
   {
     path: 'updateInfoUsuario/:email',
     component: ActualizarInfoUsuarioComponent,
-    data: { role: 'LIDER', role2: '', role3: ''} ,
+    data: { role: 'LIDER', role2: '', role3: '' },
     canActivate: [GuardGuard],
   },
   {
     path: 'consultarProductos',
     component: ConsultarProductosComponent,
-    data: { role: 'LIDER',role2: '', role3: 'Interesado' },
+    data: { role: 'LIDER', role2: 'Ventas', role3: 'Interesado' },
     canActivate: [GuardGuard],
   },
   {
@@ -56,6 +57,12 @@ const routes: Routes = [
     canActivate: [GuardGuard],
   },
   { path: 'login', component: LoginComponent },
+  {
+    path: 'verFactura',
+    component: VerFacturaComponent,
+    data: { role: '', role2: 'Ventas', role3: '' },
+    canActivate: [GuardGuard],
+  },
 ];
 
 @NgModule({
