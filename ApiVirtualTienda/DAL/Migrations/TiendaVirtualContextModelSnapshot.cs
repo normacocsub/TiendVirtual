@@ -29,28 +29,28 @@ namespace DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Descuento")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
-                    b.Property<int?>("FacturaCodigo")
-                        .HasColumnType("int");
+                    b.Property<string>("FacturaCodigo")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("IVA")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<string>("ProductoId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("ValorDescuento")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<decimal>("ValorUnitario")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.HasKey("Codigo");
 
@@ -58,21 +58,19 @@ namespace DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("Detalle");
+                    b.ToTable("Detalles");
                 });
 
             modelBuilder.Entity("Entity.Factura", b =>
                 {
-                    b.Property<int>("Codigo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Codigo")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Descuento")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
@@ -84,22 +82,22 @@ namespace DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("IVA")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<string>("InteresadoId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("SubTotal")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<string>("UsuarioVentasId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("ValorSinDescuento")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.HasKey("Codigo");
 
@@ -123,7 +121,7 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Descuento")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
@@ -132,16 +130,16 @@ namespace DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("IVA")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<string>("ProveedorNIT")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("ValorDescontado")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.Property<decimal>("ValorUnitario")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(17,4)");
 
                     b.HasKey("Codigo");
 
@@ -175,6 +173,9 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KeyDesEncriptarPassword")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombres")
@@ -215,7 +216,7 @@ namespace DAL.Migrations
             modelBuilder.Entity("Entity.Detalle", b =>
                 {
                     b.HasOne("Entity.Factura", null)
-                        .WithMany("Detalles")
+                        .WithMany()
                         .HasForeignKey("FacturaCodigo");
 
                     b.HasOne("Entity.Producto", null)
@@ -248,11 +249,6 @@ namespace DAL.Migrations
                         .HasForeignKey("UsuarioEmail");
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("Entity.Factura", b =>
-                {
-                    b.Navigation("Detalles");
                 });
 #pragma warning restore 612, 618
         }

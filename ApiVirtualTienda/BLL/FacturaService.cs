@@ -31,10 +31,15 @@ namespace BLL
                 {
                     factura.EstadoTransaccion = "Venta";
                     factura.Fecha = DateTime.Now;
-                    _context.Facturas.Add(factura);
+                    factura.Codigo = (_context.Facturas.ToList().Count + 1).ToString();
+
+                    
                     bool estadoTransaction = false;
-                    foreach (var item in factura.Detalles)
+                    _context.Facturas.Add(factura);
+                    foreach (var item in factura.ConsultarDetalles())
                     {
+                        item.FacturaCodigo = factura.Codigo;
+                        _context.Detalles.Add(item);
                         var result = _serviceProducto.DescontarCantidad(item.Cantidad, item.ProductoId);
                         if(result.Error)
                         {
@@ -64,6 +69,7 @@ namespace BLL
             try
             {
                 Factura factura = new Factura();
+                factura.Codigo = (_context.Facturas.ToList().Count + 1).ToString();
                 factura.EstadoTransaccion = "Compra";
                 factura.Estado = "Activo";
                 detalle.Producto.Codigo = (_context.Productos.ToList().Count + 1).ToString();
@@ -76,6 +82,12 @@ namespace BLL
                 factura.IVA = IVA;
                 factura.CalcularTotal();
                 _context.Facturas.Add(factura);
+                foreach (var item in factura.ConsultarDetalles())
+                {
+                    item.FacturaCodigo = factura.Codigo;
+                    _context.Detalles.Add(item);
+                }
+                
                 _context.SaveChanges();
                 return new GuardarFacturaResponse(factura);
             }
@@ -112,10 +124,17 @@ namespace BLL
         {
             try
             {
-                var facturas = _context.Facturas.Include(d => d.Detalles).OrderBy(f => f.Estado).ToList();
+                var facturas = _context.Facturas.OrderBy(f => f.Estado).ToList();
                 foreach (var item in facturas)
                 {
-                    item.Detalles.ForEach(d => d.Producto = _context.Productos.Find(d.ProductoId));
+                    foreach (var item2 in _context.Detalles.ToList())
+                    {
+                        if(item.Codigo.Equals(item2.FacturaCodigo))
+                        {
+                            item2.Producto = _context.Productos.Find(item2.ProductoId);
+                            item.AgregarDetalle(item2);
+                        }
+                    }
                 }
                 return new ConsultarFacturasResponse(facturas);
             }

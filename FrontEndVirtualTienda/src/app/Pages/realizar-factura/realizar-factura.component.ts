@@ -70,7 +70,7 @@ export class RealizarFacturaComponent implements OnInit {
   }
 
   evento(event: any) {
-    this.producto = event[0];
+    this.producto = event;
     var index = this.targetProducts.findIndex(
       (d) => d.codigo == this.producto.codigo
     );
@@ -89,7 +89,7 @@ export class RealizarFacturaComponent implements OnInit {
   }
 
   eventoRegreso(event: any) {
-    this.producto = event[0];
+    this.producto = event;
     var index = this.sourceProducts.findIndex(
       (d) => d.codigo == this.producto.codigo
     );

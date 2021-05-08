@@ -6,7 +6,7 @@ namespace TiendaWebApi.Models
 {
     public class FacturaInputModels
     {
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         public decimal IVA { get; set; }
         public decimal Descuento { get; set; }
         public int Cantidad { get; set; }
@@ -39,7 +39,7 @@ namespace TiendaWebApi.Models
             UsuarioVentasId = factura.UsuarioVentasId;
             EstadoTransaccion = factura.EstadoTransaccion;
             Fecha = factura.Fecha;
-            factura.Detalles.ForEach(d => {
+            factura.ConsultarDetalles().ForEach(d => {
                 var detalle = new DetalleViewModel(d);
                 Detalles.Add(detalle);
             });

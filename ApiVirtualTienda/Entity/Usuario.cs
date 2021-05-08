@@ -13,6 +13,7 @@ namespace Entity
         public string Sexo { get; set; }
         public string Telefono { get; set; }
         public string Estado { get; set; }
+        public string KeyDesEncriptarPassword { get; set; }
         public string Role { get; set; }
 
         public Usuario()

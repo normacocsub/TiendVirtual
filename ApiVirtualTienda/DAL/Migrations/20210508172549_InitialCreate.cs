@@ -31,6 +31,7 @@ namespace DAL.Migrations
                     Sexo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    KeyDesEncriptarPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -47,11 +48,11 @@ namespace DAL.Migrations
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Descuento = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
                     ProveedorNIT = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    IVA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorDescontado = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    IVA = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
+                    ValorDescontado = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(17,4)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,18 +87,17 @@ namespace DAL.Migrations
                 name: "Facturas",
                 columns: table => new
                 {
-                    Codigo = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IVA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Codigo = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IVA = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
+                    Descuento = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EstadoTransaccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
                     InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UsuarioVentasId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorSinDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SubTotal = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
+                    ValorSinDescuento = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -118,31 +118,31 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Detalle",
+                name: "Detalles",
                 columns: table => new
                 {
                     Codigo = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IVA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Descuento = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
+                    IVA = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    ValorDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorDescuento = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
                     ProductoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    FacturaCodigo = table.Column<int>(type: "int", nullable: true)
+                    FacturaCodigo = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Detalle", x => x.Codigo);
+                    table.PrimaryKey("PK_Detalles", x => x.Codigo);
                     table.ForeignKey(
-                        name: "FK_Detalle_Facturas_FacturaCodigo",
+                        name: "FK_Detalles_Facturas_FacturaCodigo",
                         column: x => x.FacturaCodigo,
                         principalTable: "Facturas",
                         principalColumn: "Codigo",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Detalle_Productos_ProductoId",
+                        name: "FK_Detalles_Productos_ProductoId",
                         column: x => x.ProductoId,
                         principalTable: "Productos",
                         principalColumn: "Codigo",
@@ -150,13 +150,13 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Detalle_FacturaCodigo",
-                table: "Detalle",
+                name: "IX_Detalles_FacturaCodigo",
+                table: "Detalles",
                 column: "FacturaCodigo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Detalle_ProductoId",
-                table: "Detalle",
+                name: "IX_Detalles_ProductoId",
+                table: "Detalles",
                 column: "ProductoId");
 
             migrationBuilder.CreateIndex(
@@ -183,7 +183,7 @@ namespace DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Detalle");
+                name: "Detalles");
 
             migrationBuilder.DropTable(
                 name: "Facturas");

@@ -8,25 +8,30 @@ namespace Entity
 {
     public class Factura
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal IVA { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal Descuento { get; set; }
         public int Cantidad { get; set; }
         public string Estado { get; set; }
         public string EstadoTransaccion { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal Total { get; set; }
         [NotMapped]
         public Detalle Detalle { get; set; }
-        public List<Detalle> Detalles { get; set; }
+        [NotMapped]
+        private List<Detalle> Detalles { get; set; }
         [NotMapped]
         public UsuarioInteresado UsuarioInteresado { get; set; }
         public string InteresadoId { get; set; }
         [NotMapped]
         public Usuario Usuario { get; set; }
         public string UsuarioVentasId { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal SubTotal { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal ValorSinDescuento { get; set; }
         public DateTime Fecha { get; set; }
 
@@ -50,6 +55,11 @@ namespace Entity
             };
             Detalle.CalcularTotal();
             Detalles.Add(Detalle);
+        }
+
+        public List<Detalle> ConsultarDetalles()
+        {
+            return Detalles;
         }
 
         public decimal CalcularTotalDescuento()

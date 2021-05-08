@@ -23,7 +23,8 @@ namespace TiendaWeb.Controllers
 
             if(usuarioResponse == null)
             {
-                _context.Usuarios.Add(new Usuario(){Email = "lider@gmail.com",Estado = "Activo", Password = "adminABC", Role = "LIDER"});
+                var key = Seguridad.RandomString(16);
+                _context.Usuarios.Add(new Usuario(){Email = "lider@gmail.com",Estado = "Activo", KeyDesEncriptarPassword = key, Password = Seguridad.Encriptar("adminABC", key), Role = "LIDER"});
                 _context.SaveChanges();
             }
 
@@ -227,12 +228,14 @@ namespace TiendaWeb.Controllers
 
         private UsuarioInteresado MapearInteresado(InteresadoInputModels interesadoInput)
         {
+            var key = Seguridad.RandomString(16);
             var interesado = new UsuarioInteresado
             {
                 NIT = interesadoInput.NIT,
                 Usuario = new Usuario{
                     Email = interesadoInput.Usuario.Email,
-                    Password = interesadoInput.Usuario.Password,
+                    Password = Seguridad.Encriptar(interesadoInput.Usuario.Password, key),
+                    KeyDesEncriptarPassword = key,
                     Role = "Interesado",
                     Apellidos = interesadoInput.Usuario.Apellidos,
                     Nombres = interesadoInput.Usuario.Nombres,

@@ -14,6 +14,7 @@ namespace DAL
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Proveedor> Proveedores { get; set; }
         public DbSet<Factura> Facturas { get; set; }
+        public DbSet<Detalle> Detalles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,6 +33,10 @@ namespace DAL
             modelBuilder.Entity<Producto>()
             .HasOne<Proveedor>().WithMany()
             .HasForeignKey( f => f.ProveedorNIT );
+
+            modelBuilder.Entity<Detalle>()
+            .HasOne<Factura>().WithMany()
+            .HasForeignKey( d => d.FacturaCodigo);
         }
     }
 }

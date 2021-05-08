@@ -10,15 +10,21 @@ namespace Entity
         [Key]
         public string Codigo { get; set; }
         public DateTime Fecha { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal Descuento { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal IVA { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal ValorTotal { get; set; }
         public int Cantidad { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal ValorDescuento { get; set; }
+        [Column(TypeName = "decimal(17,4)")]
         public decimal ValorUnitario { get; set; }
         [NotMapped]
         public Producto Producto { get; set; }
         public string ProductoId { get; set; }
+        public string FacturaCodigo { get; set; }
 
         public Detalle()
         {

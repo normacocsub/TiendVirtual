@@ -154,7 +154,13 @@ namespace BLL
         {
             try
             {
-                return _context.Usuarios.Where(u => u.Email.ToLower() == nombreUsuario.ToLower() && u.Password == contrasena && (u.Estado == "Activo")).FirstOrDefault();
+                var result =  _context.Usuarios.Where(u => u.Email.ToLower() == nombreUsuario.ToLower() && (u.Estado == "Activo")).FirstOrDefault();
+                var passwordDesEncriptar = Seguridad.DesEncriptar(result.Password, result.KeyDesEncriptarPassword);
+                if(passwordDesEncriptar.Equals(contrasena))
+                {
+                    return result;
+                }
+                return null;
             }
             catch (Exception)
             {
