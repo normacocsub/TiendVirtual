@@ -29,7 +29,6 @@ namespace BLL
                 var response = _context.Facturas.Find(factura.Codigo);
                 if(response == null)
                 {
-                    factura.EstadoTransaccion = "Venta";
                     factura.Fecha = DateTime.Now;
                     factura.Codigo = (_context.Facturas.ToList().Count + 1).ToString();
 
@@ -68,9 +67,9 @@ namespace BLL
         {
             try
             {
-                Factura factura = new Factura();
+                Factura factura = new FacturaCompra(detalle.Producto.Fecha);
+                factura.Fecha = DateTime.Now;
                 factura.Codigo = (_context.Facturas.ToList().Count + 1).ToString();
-                factura.EstadoTransaccion = "Compra";
                 factura.Estado = "Activo";
                 detalle.Producto.Codigo = (_context.Productos.ToList().Count + 1).ToString();
                 _context.Productos.Add(detalle.Producto);
@@ -80,7 +79,7 @@ namespace BLL
                 factura.Descuento = descuento;
                 factura.CalcularCantidad();
                 factura.IVA = IVA;
-                factura.CalcularTotal();
+                factura.CalcularTotales();
                 _context.Facturas.Add(factura);
                 foreach (var item in factura.ConsultarDetalles())
                 {

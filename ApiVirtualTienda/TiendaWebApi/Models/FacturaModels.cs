@@ -35,9 +35,14 @@ namespace TiendaWebApi.Models
             Cantidad = factura.Cantidad;
             Estado = factura.Estado;
             Total = factura.Total;
-            InteresadoId = factura.InteresadoId;
-            UsuarioVentasId = factura.UsuarioVentasId;
-            EstadoTransaccion = factura.EstadoTransaccion;
+            if(factura.transaccionName().Equals("FacturaCompra"))
+            {
+                EstadoTransaccion = "Compra";
+            }
+            else
+            {
+                EstadoTransaccion = "Venta";
+            }
             Fecha = factura.Fecha;
             factura.ConsultarDetalles().ForEach(d => {
                 var detalle = new DetalleViewModel(d);

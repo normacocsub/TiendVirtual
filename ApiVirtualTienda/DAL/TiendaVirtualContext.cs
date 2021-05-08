@@ -18,15 +18,20 @@ namespace DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Factura>()
+            .HasDiscriminator<string>("factura_type")
+            .HasValue<FacturaCompra>("factura_compra")
+            .HasValue<FacturaVenta>("factura_venta");
+
             modelBuilder.Entity<Detalle>()
             .HasOne<Producto>().WithMany()
             .HasForeignKey(p => p.ProductoId);
 
-            modelBuilder.Entity<Factura>()
+            modelBuilder.Entity<FacturaVenta>()
             .HasOne<UsuarioInteresado>().WithMany()
             .HasForeignKey( f => f.InteresadoId );
 
-            modelBuilder.Entity<Factura>()
+            modelBuilder.Entity<FacturaVenta>()
             .HasOne<Usuario>().WithMany()
             .HasForeignKey( f => f.UsuarioVentasId );
 

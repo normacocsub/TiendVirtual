@@ -92,13 +92,14 @@ namespace DAL.Migrations
                     Descuento = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EstadoTransaccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
-                    InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UsuarioVentasId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
                     ValorSinDescuento = table.Column<decimal>(type: "decimal(17,4)", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    factura_type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaCompra = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UsuarioVentasId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {

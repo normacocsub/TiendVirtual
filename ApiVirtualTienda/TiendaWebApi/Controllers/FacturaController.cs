@@ -82,7 +82,7 @@ namespace TiendaWebApi.Controllers
 
         private Factura MapearFactura(FacturaInputModels facturaInput)
         {
-            var factura = new Factura();
+            var factura = new FacturaVenta();
             facturaInput.Detalles.ForEach(d => {
                 var detalle = new Detalle
                 {
@@ -105,7 +105,7 @@ namespace TiendaWebApi.Controllers
             factura.Estado = "Activo";
             factura.InteresadoId = facturaInput.InteresadoId;
             factura.UsuarioVentasId = facturaInput.UsuarioVentasId;
-            factura.CalcularTotal();
+            factura.CalcularTotales();
             return factura;
         }
 

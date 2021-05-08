@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Entity
 {
-    public class Factura
+    public abstract class Factura
     {
         [Key]
         public string Codigo { get; set; }
@@ -16,24 +16,17 @@ namespace Entity
         public decimal Descuento { get; set; }
         public int Cantidad { get; set; }
         public string Estado { get; set; }
-        public string EstadoTransaccion { get; set; }
         [Column(TypeName = "decimal(17,4)")]
         public decimal Total { get; set; }
         [NotMapped]
         public Detalle Detalle { get; set; }
         [NotMapped]
         private List<Detalle> Detalles { get; set; }
-        [NotMapped]
-        public UsuarioInteresado UsuarioInteresado { get; set; }
-        public string InteresadoId { get; set; }
-        [NotMapped]
-        public Usuario Usuario { get; set; }
-        public string UsuarioVentasId { get; set; }
+        public DateTime Fecha { get; set; }
         [Column(TypeName = "decimal(17,4)")]
-        public decimal SubTotal { get; set; }
+         public decimal SubTotal { get; set; }
         [Column(TypeName = "decimal(17,4)")]
         public decimal ValorSinDescuento { get; set; }
-        public DateTime Fecha { get; set; }
 
         public Factura()
         {
@@ -62,40 +55,30 @@ namespace Entity
             return Detalles;
         }
 
-        public decimal CalcularTotalDescuento()
-        {
-            return Descuento = Detalles.Sum(f => f.ValorDescuento * f.Cantidad);
-        }
+        public abstract decimal CalcularTotalDescuento();
 
-        public decimal CalcularTotalIVA()
-        {
-            return IVA = Detalles.Sum(f => f.IVA * f.Cantidad);
-        }
+        public abstract decimal CalcularTotalIVA();
+        public abstract decimal CalcularSubTotal();
 
-        public decimal CalcularSubTotal()
-        {
-            return SubTotal = Detalles.Sum( d => d.ValorUnitario * d.Cantidad);
-        }
-
-        public decimal CalcularValorSinDescuento()
-        {
-            return ValorSinDescuento = Detalles.Sum( d => (d.IVA + d.ValorUnitario) * d.Cantidad );
-        }
-
+        public abstract decimal CalcularValorSinDescuento();
         public decimal CalcularCantidad()
         {
             return Cantidad = Detalles.Sum(d => d.Cantidad);
         }
 
-        public decimal CalcularTotal()
+        public abstract decimal CalcularTotal();
+
+        public void CalcularTotales()
         {
             CalcularValorSinDescuento();
             CalcularSubTotal();
             CalcularTotalDescuento();
             CalcularTotalIVA();
             CalcularCantidad();
-            return Total = Detalles.Sum(f => f.ValorTotal * f.Cantidad);
+            CalcularTotal();
         }
+
+        public abstract string transaccionName();
         
     }
 }

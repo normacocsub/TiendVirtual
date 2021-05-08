@@ -212,12 +212,14 @@ namespace TiendaWeb.Controllers
         }
         private Usuario MapearUsuario(UsuarioInputModel usuarioInput)
         {
+            var key = Seguridad.RandomString(16);
             var usuario = new Usuario
             {
                 Email = usuarioInput.Email,
-                Password = usuarioInput.Password,
+                Password = Seguridad.Encriptar(usuarioInput.Password,key),
                 Role = "Ventas",
                 Apellidos = usuarioInput.Apellidos,
+                KeyDesEncriptarPassword = key,
                 Nombres = usuarioInput.Nombres,
                 Sexo = usuarioInput.Sexo,
                 Telefono = usuarioInput.Telefono,

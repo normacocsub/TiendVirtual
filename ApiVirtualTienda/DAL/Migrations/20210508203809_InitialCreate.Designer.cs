@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(TiendaVirtualContext))]
-    [Migration("20210508172549_InitialCreate")]
+    [Migration("20210508203809_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,17 +77,11 @@ namespace DAL.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EstadoTransaccion")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("IVA")
                         .HasColumnType("decimal(17,4)");
-
-                    b.Property<string>("InteresadoId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(17,4)");
@@ -95,19 +89,18 @@ namespace DAL.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(17,4)");
 
-                    b.Property<string>("UsuarioVentasId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<decimal>("ValorSinDescuento")
                         .HasColumnType("decimal(17,4)");
 
+                    b.Property<string>("factura_type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Codigo");
 
-                    b.HasIndex("InteresadoId");
-
-                    b.HasIndex("UsuarioVentasId");
-
                     b.ToTable("Facturas");
+
+                    b.HasDiscriminator<string>("factura_type").HasValue("Factura");
                 });
 
             modelBuilder.Entity("Entity.Producto", b =>
@@ -215,6 +208,33 @@ namespace DAL.Migrations
                     b.ToTable("Interesados");
                 });
 
+            modelBuilder.Entity("Entity.FacturaCompra", b =>
+                {
+                    b.HasBaseType("Entity.Factura");
+
+                    b.Property<DateTime>("FechaCompra")
+                        .HasColumnType("datetime2");
+
+                    b.HasDiscriminator().HasValue("factura_compra");
+                });
+
+            modelBuilder.Entity("Entity.FacturaVenta", b =>
+                {
+                    b.HasBaseType("Entity.Factura");
+
+                    b.Property<string>("InteresadoId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UsuarioVentasId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("InteresadoId");
+
+                    b.HasIndex("UsuarioVentasId");
+
+                    b.HasDiscriminator().HasValue("factura_venta");
+                });
+
             modelBuilder.Entity("Entity.Detalle", b =>
                 {
                     b.HasOne("Entity.Factura", null)
@@ -224,17 +244,6 @@ namespace DAL.Migrations
                     b.HasOne("Entity.Producto", null)
                         .WithMany()
                         .HasForeignKey("ProductoId");
-                });
-
-            modelBuilder.Entity("Entity.Factura", b =>
-                {
-                    b.HasOne("Entity.UsuarioInteresado", null)
-                        .WithMany()
-                        .HasForeignKey("InteresadoId");
-
-                    b.HasOne("Entity.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuarioVentasId");
                 });
 
             modelBuilder.Entity("Entity.Producto", b =>
@@ -251,6 +260,17 @@ namespace DAL.Migrations
                         .HasForeignKey("UsuarioEmail");
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Entity.FacturaVenta", b =>
+                {
+                    b.HasOne("Entity.UsuarioInteresado", null)
+                        .WithMany()
+                        .HasForeignKey("InteresadoId");
+
+                    b.HasOne("Entity.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("UsuarioVentasId");
                 });
 #pragma warning restore 612, 618
         }
